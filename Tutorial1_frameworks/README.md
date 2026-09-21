@@ -10,8 +10,8 @@ actually use.**
 |---|---|
 | **Notebook** | [`01_agents_for_science.ipynb`](01_agents_for_science.ipynb) |
 | **Audience** | Researchers who can read Python; no agent, LangChain or LLM-API experience assumed |
-| **Cost** | Free — Google AI Studio free tier + the keyless arXiv API |
-| **Prerequisite** | A free API key from <https://aistudio.google.com/apikey> (one minute, no card) |
+| **Cost** | Under a cent per run — DeepSeek V4.1 Flash via OpenRouter + the keyless arXiv API. A free Google AI Studio key also works |
+| **Prerequisite** | An API key from <https://openrouter.ai/keys> with a little credit (or a free one from <https://aistudio.google.com/apikey>) |
 
 ## The one idea
 
@@ -83,10 +83,11 @@ worth defending is that handing your function to `create_agent` is where control
 ## Logistics that matter more than the framework
 
 * **One API key per attendee.** Thirty people on one key hit the rate limit in minutes. Send
-  the AI Studio link out *before* the session and ask people to arrive with a key already in
-  Colab's Secrets panel (🔑 in the left sidebar, named `GOOGLE_API_KEY`). Asking for an
-  `OPENROUTER_API_KEY` in the same email costs them another minute and gives the room a second
-  provider to fall back on.
+  <https://openrouter.ai/keys> out *before* the session and ask people to arrive with the key
+  already in Colab's Secrets panel (🔑 in the left sidebar, named `OPENROUTER_API_KEY`), plus a
+  dollar of credit — a run of this notebook costs well under a cent. Mention the free Google AI
+  Studio key in the same email as the no-spend alternative; it needs `GOOGLE_API_KEY` and
+  `PROVIDER = "google"`, and it queues under load.
 * **arXiv as the default source.** No key, tolerant of a classroom, good coverage of
   physics/CS/quant-bio. The notebook's Exercise 2 adds PubMed (NCBI E-utilities, also keyless,
   ≤3 req/s) for life-science audiences. OpenAlex is the option for every other field.
@@ -106,7 +107,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install "langchain==1.4.2" "langchain-google-genai==4.4.0" \
             "langchain-openai==1.6.2" "deepagents==0.7.16" \
             "pydantic-ai==2.46.0" pandas jupyterlab
-export GOOGLE_API_KEY=...        # or OPENROUTER_API_KEY; getpass prompts if neither is set
+export OPENROUTER_API_KEY=...    # or GOOGLE_API_KEY; getpass prompts if neither is set
 jupyter lab 01_agents_for_science.ipynb
 ```
 
@@ -114,13 +115,14 @@ Versions are pinned in the install cell on purpose — this ecosystem moves fast
 a notebook between semesters. To run on the latest releases, drop the `==` pins and expect to
 fix a thing or two.
 
-**Switching provider** is the `PROVIDER` variable in Step 0, which selects Google (default)
-or OpenRouter. `google_genai:gemini-3.5-flash-lite` is the move if the free quota gets tight;
+**Switching provider** is the `PROVIDER` variable in Step 0, which selects OpenRouter
+(default) or Google. `google_genai:gemini-3.5-flash-lite` is the move if the free quota gets tight;
 `openai:gpt-5.2` and `anthropic:claude-sonnet-5` need their own `init_chat_model` line and the
 matching `langchain-*` package.
 
-**OpenRouter** puts hundreds of models behind one key, which makes it the escape hatch when
-Google is overloaded and the easiest way to compare models later in the session. Two caveats,
+**OpenRouter** puts hundreds of models behind one key, which is why it is the default: the
+room is not sharing one provider's free-tier capacity, and comparing models later is a
+one-line change. Two caveats,
 both in the notebook: the model must support **tool calling** (filter for Tools on
 openrouter.ai/models — a model without it never calls `search_arxiv` and merely looks broken),
 and free model ids churn, so verify a current one rather than trusting any written down here.
@@ -133,12 +135,12 @@ Where the room gets stuck, in the order it happens:
 
 1. **The key.** Secret name misspelt, or *Notebook access* left off — the symptom is a
    `userdata` error or a `getpass` prompt. Budget five minutes and walk the room.
-2. **`429 RESOURCE_EXHAUSTED` or `503 UNAVAILABLE`.** The first is quota — free tier, or a
-   shared key. The second is Google's capacity, and it hits the whole room at once. Have the
-   fallback ready to call from the front: `MODEL_NAME = "google_genai:gemini-3.5-flash-lite"`.
-   Note that the client already retries roughly six times with backoff, so a 503 that reaches
-   an attendee will not fix itself on a quick re-run. Verify your chosen model the morning of
-   the workshop, and keep a second provider's key in your own pocket.
+2. **`429` or `503 UNAVAILABLE`.** The first is quota, rate limit, or an empty OpenRouter
+   balance; the second is provider capacity and hits the whole room at once. Have the fallback
+   ready to call from the front — another OpenRouter model id, or `PROVIDER = "google"`. The
+   client already retries several times with backoff, so a 503 that reaches an attendee will
+   not fix itself on a quick re-run. Verify your chosen model the morning of the workshop, and
+   keep a second provider's key in your own pocket.
 3. **Red pip output at Step 0.** The install cell always prints
    `ERROR: pip's dependency resolver...` about `google-auth`: Colab pins `2.49.0`, the Gemini
    client needs `>=2.56`, and the two cannot both be satisfied. It is a warning, the install
