@@ -121,8 +121,12 @@ Where the room gets stuck, in the order it happens:
 
 1. **The key.** Secret name misspelt, or *Notebook access* left off — the symptom is a
    `userdata` error or a `getpass` prompt. Budget five minutes and walk the room.
-2. **`429 RESOURCE_EXHAUSTED`.** Free tier, or a shared key. Wait a minute, or switch to
-   `gemini-3.5-flash-lite`.
+2. **`429 RESOURCE_EXHAUSTED` or `503 UNAVAILABLE`.** The first is quota — free tier, or a
+   shared key. The second is Google's capacity, and it hits the whole room at once. Have the
+   fallback ready to call from the front: `MODEL_NAME = "google_genai:gemini-3.5-flash-lite"`.
+   Note that the client already retries roughly six times with backoff, so a 503 that reaches
+   an attendee will not fix itself on a quick re-run. Verify your chosen model the morning of
+   the workshop, and keep a second provider's key in your own pocket.
 3. **Red pip output at Step 0.** The install cell always prints
    `ERROR: pip's dependency resolver...` about `google-auth`: Colab pins `2.49.0`, the Gemini
    client needs `>=2.56`, and the two cannot both be satisfied. It is a warning, the install
