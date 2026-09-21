@@ -15,7 +15,7 @@ actually use.**
 
 ## The one idea
 
-Every agent library is a wrapper around the same short loop:
+Every agent **framework** wraps the same short loop:
 
 > Send the conversation plus a list of tool descriptions to the LLM. If it replies asking to
 > call a tool, run that Python function, append the result, and call the LLM again. Stop when
@@ -41,9 +41,9 @@ keeps people from treating agents as magic.
 An optional appendix repeats the agent in Pydantic AI, to make the point that the framework
 choice is the least important decision in the notebook.
 
-## Why these libraries
+## Why these frameworks
 
-| Library | Case for it | Catch |
+| Framework | Case for it | Catch |
 |---|---|---|
 | **LangChain 1.x** (`create_agent`) — *used for the core* | Post-1.0 API is genuinely small; model-agnostic; the name attendees will meet again | Heavy install; the web is full of stale 2023 tutorials (`initialize_agent`, `AgentExecutor`) — the notebook warns about this explicitly |
 | **DeepAgents** — *used for the finale* | Identical signature to `create_agent`, but adds planning, a virtual filesystem and sub-agents. "How does this scale up?" becomes a one-cell answer | Too much hidden machinery for a first lesson; more tokens; still 0.x |
@@ -52,6 +52,33 @@ choice is the least important decision in the notebook.
 | Google ADK | Natural with Colab + Gemini | Runners and session services make hello-world verbose |
 | smolagents | Tiny, readable source | Its flagship `CodeAgent` has the LLM write Python — a second paradigm to teach on day one |
 | CrewAI, Microsoft Agent Framework, LlamaIndex | Multi-agent and RAG-first framings | More concepts than lesson one needs; name LlamaIndex if a follow-up reads full PDFs |
+
+## A note on vocabulary: library, framework or SDK?
+
+Attendees ask, and the packages themselves do not agree. On PyPI, pydantic-ai is an "AI Agent
+Framework", smolagents is "a barebones library for agents", openai-agents is an "SDK",
+google-adk is a "Kit", deepagents is a "harness", and langchain dodges the question entirely.
+
+The distinction that actually holds is **inversion of control**:
+
+* a **library** is code *you* call — `search_arxiv(TOPIC)` in Step 1;
+* a **framework** calls *your* code — you hand `search_arxiv` to `create_agent` in Step 3, and
+  it decides when to call it.
+
+Strictly applied, most of these are libraries that invert control for the duration of one call:
+they do not own your program's structure the way CrewAI, Google ADK or Microsoft Agent
+Framework do. But "agent framework" is the settled term of art for the category, so the
+notebook uses:
+
+| Word | For |
+|---|---|
+| **framework** | the category, and what one does for you — "agent frameworks", "what did the framework add?" |
+| **library** | a specific package as a package — "the deepagents library", "pin the library version" |
+| **SDK** | a vendor's client for its own service — `openai`, `anthropic`, `google-genai` |
+
+"Harness", "kit" and "toolkit" are vendor branding and only confuse a first-timer. If someone
+objects that LangChain is "just a library", they are not wrong — say so and move on. The point
+worth defending is that handing your function to `create_agent` is where control changes hands.
 
 ## Logistics that matter more than the framework
 
@@ -105,6 +132,9 @@ Where the room gets stuck, in the order it happens:
    variation across laptops reads as breakage.
 6. **Agents cannot run code.** Worth stating twice: the model emits a *request*; your Python
    decides whether to honour it. That framing carries the whole security discussion in Step 8.
+7. **"Is this a library or a framework?"** Someone always asks. See *A note on vocabulary*
+   above; the short answer is that a framework calls your code, which is exactly what happens
+   in Step 3.
 
 ## Scientific caveats the notebook makes attendees confront
 
