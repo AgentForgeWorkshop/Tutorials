@@ -127,7 +127,9 @@ Where the room gets stuck, in the order it happens:
    `ERROR: pip's dependency resolver...` about `google-auth`: Colab pins `2.49.0`, the Gemini
    client needs `>=2.56`, and the two cannot both be satisfied. It is a warning, the install
    succeeded, and nothing here uses the affected code path. Say so before you run the cell, or
-   you will lose five minutes to it.
+   you will lose five minutes to it. The first LLM call then logs a one-off `automatic function
+   calling (AFC)` warning from Google's SDK — also harmless, and Step 3 turns it into a point
+   about who runs the loop.
 4. **Step 0b is the whole motivation — don't rush it.** Ask people to read the fabricated
    citations out loud before you move on. If the model refuses instead of hallucinating,
    that lands the point equally well.
