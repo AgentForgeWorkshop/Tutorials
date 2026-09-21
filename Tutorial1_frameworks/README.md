@@ -123,16 +123,21 @@ Where the room gets stuck, in the order it happens:
    `userdata` error or a `getpass` prompt. Budget five minutes and walk the room.
 2. **`429 RESOURCE_EXHAUSTED`.** Free tier, or a shared key. Wait a minute, or switch to
    `gemini-3.5-flash-lite`.
-3. **Step 0b is the whole motivation — don't rush it.** Ask people to read the fabricated
+3. **Red pip output at Step 0.** The install cell always prints
+   `ERROR: pip's dependency resolver...` about `google-auth`: Colab pins `2.49.0`, the Gemini
+   client needs `>=2.56`, and the two cannot both be satisfied. It is a warning, the install
+   succeeded, and nothing here uses the affected code path. Say so before you run the cell, or
+   you will lose five minutes to it.
+4. **Step 0b is the whole motivation — don't rush it.** Ask people to read the fabricated
    citations out loud before you move on. If the model refuses instead of hallucinating,
    that lands the point equally well.
-4. **Step 2 is the lesson.** If you are running short, cut Step 6 or Step 7, never Step 2.
+5. **Step 2 is the lesson.** If you are running short, cut Step 6 or Step 7, never Step 2.
    Ask someone to narrate the trace before you explain it.
-5. **Non-determinism.** The same cell can call one search or three. Say so up front, or the
+6. **Non-determinism.** The same cell can call one search or three. Say so up front, or the
    variation across laptops reads as breakage.
-6. **Agents cannot run code.** Worth stating twice: the model emits a *request*; your Python
+7. **Agents cannot run code.** Worth stating twice: the model emits a *request*; your Python
    decides whether to honour it. That framing carries the whole security discussion in Step 8.
-7. **"Is this a library or a framework?"** Someone always asks. See *A note on vocabulary*
+8. **"Is this a library or a framework?"** Someone always asks. See *A note on vocabulary*
    above; the short answer is that a framework calls your code, which is exactly what happens
    in Step 3.
 
