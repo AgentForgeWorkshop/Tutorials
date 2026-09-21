@@ -84,7 +84,9 @@ worth defending is that handing your function to `create_agent` is where control
 
 * **One API key per attendee.** Thirty people on one key hit the rate limit in minutes. Send
   the AI Studio link out *before* the session and ask people to arrive with a key already in
-  Colab's Secrets panel (🔑 in the left sidebar, named `GOOGLE_API_KEY`).
+  Colab's Secrets panel (🔑 in the left sidebar, named `GOOGLE_API_KEY`). Asking for an
+  `OPENROUTER_API_KEY` in the same email costs them another minute and gives the room a second
+  provider to fall back on.
 * **arXiv as the default source.** No key, tolerant of a classroom, good coverage of
   physics/CS/quant-bio. The notebook's Exercise 2 adds PubMed (NCBI E-utilities, also keyless,
   ≤3 req/s) for life-science audiences. OpenAlex is the option for every other field.
@@ -101,9 +103,10 @@ bottom.
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install "langchain==1.4.2" "langchain-google-genai==4.4.0" "deepagents==0.7.16" \
+pip install "langchain==1.4.2" "langchain-google-genai==4.4.0" \
+            "langchain-openai==1.6.2" "deepagents==0.7.16" \
             "pydantic-ai==2.46.0" pandas jupyterlab
-export GOOGLE_API_KEY=...        # the notebook falls back to getpass if this is unset
+export GOOGLE_API_KEY=...        # or OPENROUTER_API_KEY; getpass prompts if neither is set
 jupyter lab 01_agents_for_science.ipynb
 ```
 
@@ -111,9 +114,18 @@ Versions are pinned in the install cell on purpose — this ecosystem moves fast
 a notebook between semesters. To run on the latest releases, drop the `==` pins and expect to
 fix a thing or two.
 
-**Switching provider** is one string in Step 0: `openai:gpt-5.2`,
-`anthropic:claude-sonnet-5`, or `google_genai:gemini-3.5-flash-lite` if the free quota gets
-tight. Install the matching `langchain-*` package and set the matching env var.
+**Switching provider** is the `PROVIDER` variable in Step 0, which selects Google (default)
+or OpenRouter. `google_genai:gemini-3.5-flash-lite` is the move if the free quota gets tight;
+`openai:gpt-5.2` and `anthropic:claude-sonnet-5` need their own `init_chat_model` line and the
+matching `langchain-*` package.
+
+**OpenRouter** puts hundreds of models behind one key, which makes it the escape hatch when
+Google is overloaded and the easiest way to compare models later in the session. Two caveats,
+both in the notebook: the model must support **tool calling** (filter for Tools on
+openrouter.ai/models — a model without it never calls `search_arxiv` and merely looks broken),
+and free model ids churn, so verify a current one rather than trusting any written down here.
+Free tiers also queue under load, so they suit comparison exercises better than thirty people
+working in lockstep.
 
 ## Instructor notes
 
