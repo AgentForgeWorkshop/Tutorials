@@ -1,0 +1,7 @@
+mcp>=2.2,<3         # MCP Python SDK v2
+pypdf>=5.0          # reads your PDFs
+httpx>=0.27         # online literature search
+python-dotenv>=1.0  # reads .env
+pyyaml>=6.0         # reads SKILL.md
+anthropic>=2.0      # used when your key starts with sk-ant-
+openai>=2.0         # used for any other key
