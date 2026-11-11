@@ -69,6 +69,7 @@ app. **Then start with [Step 1](docs/01-local-library.md).**
 | `chat.py` | A small AI app for your terminal, if you have no other |
 | `03_mcp_skills_colab.ipynb` | The same steps in Google Colab, with nothing to install |
 | `sample_library/` | Five practice papers |
+| `get_demo_papers.py` | Downloads three real, freely available papers into `sample_library/` (optional) |
 | `tests/` | `pip install -r requirements-dev.txt`, then `python -m pytest` (no key or internet needed) |
 
 ## What leaves your computer
@@ -84,6 +85,10 @@ Use your organisation's approved AI tools for confidential or unpublished work.
 
 The five PDFs in `sample_library/` are **synthetic**. They were written for this workshop, with
 invented authors and data, and papers 1 and 5 partly disagree on purpose. Do not cite them.
+
+`python get_demo_papers.py` adds three real review papers on semiconductors (Wong et al. 2021,
+Woods-Robinson et al. 2020, Yue et al. 2020), downloaded from arXiv and OSTI.gov. Only their links
+are in this repository; the PDFs stay on your computer.
 
 ## Keep going
 

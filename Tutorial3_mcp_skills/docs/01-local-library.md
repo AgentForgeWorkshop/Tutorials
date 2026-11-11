@@ -79,6 +79,25 @@ def search_papers(query: str, top_k: int = 5) -> str:
 - The **docstring** is what the model reads to decide when to use the tool.
 - The real work is in `research_tools/library.py`, which knows nothing about MCP.
 
+## Practise with real papers
+
+After the checkpoint, add three real review papers on semiconductors to the practice library:
+
+```bash
+python get_demo_papers.py
+```
+
+They are free author versions, downloaded from arXiv and OSTI.gov into
+`sample_library/demo_semiconductors/`. Git ignores that folder, because publishers' PDFs must not be
+shared publicly: the repository keeps only the links. Then try:
+
+```text
+Which semiconductors in my library have the widest band gaps, and what limits their use?
+```
+
+Two related papers have no free copy. The script prints their DOI links, in case your institution
+has access.
+
 ## Try this
 
 1. Add a new PDF to your folder and search for its topic. No restart is needed.

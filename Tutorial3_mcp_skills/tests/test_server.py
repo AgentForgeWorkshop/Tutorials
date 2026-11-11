@@ -472,3 +472,26 @@ def test_review_completions_work_through_an_openai_compatible_service():
         assert complete(router, "system", "hello") == "PLAIN: hello"
     finally:
         fake.shutdown()
+
+
+# ---- get_demo_papers.py ---------------------------------------------------------
+def test_demo_papers_download_skips_existing_and_rejects_non_pdf(tmp_path, monkeypatch):
+    import get_demo_papers as demo
+
+    def fake_get(url, **kwargs):
+        body = b"<html>sign in</html>" if "osti" in url else b"%PDF-1.7 fake"
+        return httpx.Response(200, content=body, request=httpx.Request("GET", url))
+
+    monkeypatch.setattr(demo.httpx, "get", fake_get)
+    monkeypatch.setattr(demo.time, "sleep", lambda seconds: None)
+    (tmp_path / demo.FREE[1]["file"]).write_bytes(b"%PDF already here")
+
+    assert demo.main(tmp_path) == 1                    # one source sent HTML, not a PDF
+    assert not (tmp_path / demo.FREE[0]["file"]).exists()
+    assert (tmp_path / demo.FREE[1]["file"]).read_bytes() == b"%PDF already here"
+    assert (tmp_path / demo.FREE[2]["file"]).read_bytes().startswith(b"%PDF")
+
+
+def test_downloaded_papers_are_never_committed():
+    rules = (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
+    assert "sample_library/demo_semiconductors/" in rules
