@@ -1,6 +1,6 @@
 ---
 name: calculator
-description: Does exact arithmetic for science questions with the calculate tool instead of mental maths - ratios, percentage changes, capacity retention, fade per cycle, specific and theoretical capacity, C-rates. Use whenever an answer needs a number computed from other numbers.
+description: Does exact arithmetic for science questions with the calculate tool instead of mental maths - ratios, percentage changes, band gaps and photon wavelengths, capacity retention, specific and theoretical capacity, C-rates. Use whenever an answer needs a number computed from other numbers.
 license: MIT
 metadata:
   author: AgentForge Tutorial 3
@@ -13,12 +13,12 @@ Language models make arithmetic slips. Never compute a number in your head: use 
 
 ## Steps
 
-1. Write the calculation as one expression, for example `412/487*100`.
-   For battery and materials formulas (retention, fade per cycle, specific and theoretical
+1. Write the calculation as one expression, for example `1239.84/3.4`.
+   For materials formulas (band gap to wavelength, retention, specific and theoretical
    capacity, C-rate, energy), read `references/formulas.md` first with
    `read_skill_file(name="calculator", path="references/formulas.md")`.
 2. Call `calculate` with the expression. If the `calculate` tool is not available, run
-   `python scripts/calc.py "412/487*100"` from this skill's folder instead.
+   `python scripts/calc.py "1239.84/3.4"` from this skill's folder instead.
 3. Report the expression, the result with sensible significant figures, and the units.
    If an input number came from a paper, cite where it came from as (file, p. N).
 

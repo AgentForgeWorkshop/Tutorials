@@ -46,21 +46,21 @@ Send these one at a time and watch which tools are called.
 **Find the papers:**
 
 ```text
-Use Valency to find the 10 most relevant papers since 2022 on interlayers for suppressing
-lithium dendrites in solid-state batteries. For each one, give the title, first author, year,
+Use Valency to find the 10 most relevant papers since 2022 on ultrawide-bandgap semiconductors
+for power electronics. For each one, give the title, first author, year,
 link and main finding in one line. Use only what Valency returns.
 ```
 
 **See the trend:**
 
 ```text
-Use Valency to show how publications on "solid electrolyte interlayer" have changed by year.
+Use Valency to show how publications on "gallium oxide" have changed by year.
 ```
 
 **Compare the evidence:**
 
 ```text
-From those papers, make a table of material, cell type, stack pressure and main result.
+From those papers, make a table of material, band gap, main application and main limitation.
 Write "not reported" when the abstract does not say. Where do the papers disagree?
 ```
 
@@ -98,7 +98,7 @@ Now one conversation can use your local library **and** Valency.
 ## Wrap-up
 
 ```text
-Compare what my library says about stack pressure with what Valency finds in the published
+Compare what my library says about ultrawide-bandgap semiconductors with what Valency finds in the published
 literature. Where is my library behind the field?
 ```
 

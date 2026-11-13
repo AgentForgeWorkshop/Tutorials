@@ -495,3 +495,11 @@ def test_demo_papers_download_skips_existing_and_rejects_non_pdf(tmp_path, monke
 def test_downloaded_papers_are_never_committed():
     rules = (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
     assert "sample_library/demo_semiconductors/" in rules
+
+
+def test_try_server_passes_environment_to_the_server(library):
+    """Colab has no .env file, so settings arrive as environment variables."""
+    env = {**os.environ, "LIBRARY_PATH": str(library)}
+    done = subprocess.run([sys.executable, str(ROOT / "try_server.py")], env=env, capture_output=True, text=True, timeout=120)
+    assert done.returncode == 0, done.stderr
+    assert f"Library folder: {library}" in done.stdout

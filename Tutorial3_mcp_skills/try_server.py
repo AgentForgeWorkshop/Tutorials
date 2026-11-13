@@ -2,10 +2,10 @@
 """Talk to your MCP server directly, with no AI model involved.
 
     python try_server.py                  what the server offers
-    python try_server.py local "stack pressure"
-    python try_server.py online "lithium dendrite interlayer"
-    python try_server.py calc "412/487*100"
-    python try_server.py lay paper5
+    python try_server.py local "band gap"
+    python try_server.py online "ultrawide bandgap semiconductor power electronics"
+    python try_server.py calc "1239.84/3.4"
+    python try_server.py lay Wong
 
 This does what every AI app does when it connects: start the server, discover what it offers,
 then call a tool. If this works and your AI app does not, the problem is in the app's settings.
@@ -13,6 +13,7 @@ then call a tool. If this works and your AI app does not, the problem is in the 
 from __future__ import annotations
 
 import asyncio
+import os
 import sys
 from pathlib import Path
 
@@ -21,11 +22,11 @@ from mcp import Client, StdioServerParameters
 SERVER = Path(__file__).resolve().parent / "server.py"
 
 SAMPLE_DRAFT = (
-    "Lithium batteries can fail when needle-like metal growths form inside them. Researchers "
-    "tested 20 battery cells to see what stops these growths. Squeezing the cells firmly helped "
-    "most, and made them last about 2.4 times longer. A protective layer added little under the "
-    "same pressure. The catch is that the study used only liquid-filled cells, and this much "
-    "pressure is not practical for every battery shape."
+    "Most electronics use silicon, but some jobs need materials that can handle much higher "
+    "voltages. This review looks at a group of materials with a very wide band gap (the energy "
+    "needed to free an electron). Their gaps are much larger than the 3.4 eV of gallium nitride. "
+    "Diamond, for example, has a gap of 5.5 eV. These materials could make power devices smaller "
+    "and more efficient. The catch is that many of them are still hard to grow and to dope."
 )
 
 
@@ -39,7 +40,7 @@ async def main() -> None:
     command = sys.argv[1] if len(sys.argv) > 1 else "discover"
     argument = sys.argv[2] if len(sys.argv) > 2 else ""
 
-    async with Client(StdioServerParameters(command=sys.executable, args=[str(SERVER)])) as client:
+    async with Client(StdioServerParameters(command=sys.executable, args=[str(SERVER)], env=dict(os.environ))) as client:
         if command == "discover":
             print("Connected to research-mcp.\n\nTOOLS: the AI model decides when to call these")
             for tool in (await client.list_tools()).tools:
@@ -53,16 +54,16 @@ async def main() -> None:
             await show(client, "list_papers", {})
             await show(client, "list_skills", {})
         elif command == "local":
-            await show(client, "search_papers", {"query": argument or "stack pressure", "top_k": 3})
+            await show(client, "search_papers", {"query": argument or "band gap", "top_k": 3})
         elif command == "online":
-            await show(client, "search_online", {"query": argument or "lithium dendrite interlayer", "limit": 4})
+            await show(client, "search_online", {"query": argument or "ultrawide bandgap semiconductor power electronics", "limit": 4})
         elif command == "review":
             await show(client, "review_online_literature",
-                       {"question": argument or "Do interlayers suppress lithium dendrites at high stack pressure?"})
+                       {"question": argument or "What limits ultrawide-bandgap semiconductors in power electronics?"})
         elif command == "calc":
-            await show(client, "calculate", {"expression": argument or "412/487*100"})
+            await show(client, "calculate", {"expression": argument or "1239.84/3.4"})
         elif command == "lay":
-            await show(client, "review_lay_abstract", {"draft": SAMPLE_DRAFT, "document": argument or "paper5"})
+            await show(client, "review_lay_abstract", {"draft": SAMPLE_DRAFT, "document": argument or "Wong"})
         else:
             sys.exit(__doc__)
 

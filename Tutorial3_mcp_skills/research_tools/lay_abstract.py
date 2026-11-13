@@ -20,7 +20,7 @@ Use at most {max_words} words, in this order:
 4. The catch: the biggest limitation.
 
 Explain any unavoidable technical term in brackets the first time, for example
-dendrites (needle-like metal growths). Use short sentences and the active voice. Keep the
+band gap (the energy needed to free an electron). Use short sentences and the active voice. Keep the
 author's level of certainty: if the paper says "suggests", do not write "proves".
 
 Then call review_lay_abstract with your draft and this document. Fix whatever it flags and
@@ -32,7 +32,7 @@ _COMMON_LONG_WORDS = set(
     "experiment experiments electricity everyday important information understanding "
     "researchers laboratory temperature especially material materials particularly "
     "technology community university generally additional environmental individual "
-    "development available originally necessary eventually relatively".split()
+    "development available originally necessary eventually relatively electronics".split()
 )
 
 

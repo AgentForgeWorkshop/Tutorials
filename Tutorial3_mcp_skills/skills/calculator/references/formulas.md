@@ -1,10 +1,12 @@
-# Battery and materials formulas
+# Materials and battery formulas
 
 Read only when a calculation needs one of these. Write each as an expression for the
 `calculate` tool. The constant `F` (Faraday, 96485 C/mol) is built in.
 
 | Quantity | Formula | Example expression |
 |---|---|---|
+| Longest absorbed wavelength (nm) | 1239.84 / band gap (eV) | `1239.84/3.4` (GaN) |
+| Photon energy (eV) | 1239.84 / wavelength (nm) | `1239.84/365` |
 | Capacity retention (%) | remaining / initial × 100 | `412/487*100` |
 | Average fade per cycle (%) | (100 − retention) / cycles | `(100-84.6)/500` |
 | Fold change (how many times) | a / b | `2.4/1.1` |

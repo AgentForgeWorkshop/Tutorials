@@ -32,6 +32,7 @@ cd Tutorials/Tutorial3_mcp_skills
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python get_demo_papers.py
 python setup_workshop.py
 ```
 
@@ -43,12 +44,14 @@ cd Tutorials/Tutorial3_mcp_skills
 py -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+python get_demo_papers.py
 python setup_workshop.py
 ```
 
 No git? On [the Tutorials page](https://github.com/AgentForgeWorkshop/Tutorials), click **Code → Download ZIP**, unzip it, and open a terminal in the `Tutorial3_mcp_skills` folder.
 
-The setup asks for your library folder (you can drag it into the terminal) and your API key: the
+`get_demo_papers.py` downloads three real review papers on semiconductors, the hands-on's example
+library. The setup then asks for your library folder (press Enter for those papers, or drag in your own) and your API key: the
 same OpenRouter key as in Tutorial 1, a free Google AI Studio key, or an Anthropic or OpenAI key. Both
 are saved in `.env` on your computer, which git ignores. It then prints how to connect your AI
 app. **Then start with [Part A](docs/A-mcp-access.md).**
@@ -70,8 +73,8 @@ app. **Then start with [Part A](docs/A-mcp-access.md).**
 | `try_server.py` | Calls the server directly, with no AI, for testing |
 | `chat.py` | A small AI app for your terminal, if you have no other |
 | `03_mcp_skills_colab.ipynb` | The same parts in Google Colab, with nothing to install |
-| `sample_library/` | Five practice papers |
-| `get_demo_papers.py` | Downloads three real, freely available papers into `sample_library/` (optional) |
+| `sample_library/` | Five synthetic practice papers, used by the tests and as an offline fallback |
+| `get_demo_papers.py` | Downloads the hands-on's three real semiconductor papers (free versions) |
 | `tests/` | `pip install -r requirements-dev.txt`, then `python -m pytest` (no key or internet needed) |
 
 ## What leaves your computer
@@ -83,14 +86,14 @@ app. **Then start with [Part A](docs/A-mcp-access.md).**
 
 Use your organisation's approved AI tools for confidential or unpublished work.
 
-## About the sample papers
+## About the papers
 
-The five PDFs in `sample_library/` are **synthetic**. They were written for this workshop, with
-invented authors and data, and papers 1 and 5 partly disagree on purpose. Do not cite them.
+The hands-on uses three real review papers on semiconductors (Wong et al. 2021, Woods-Robinson et
+al. 2020, Yue et al. 2020). `python get_demo_papers.py` downloads their free author versions from
+arXiv and OSTI.gov. Only the links are in this repository; the PDFs stay on your computer.
 
-`python get_demo_papers.py` adds three real review papers on semiconductors (Wong et al. 2021,
-Woods-Robinson et al. 2020, Yue et al. 2020), downloaded from arXiv and OSTI.gov. Only their links
-are in this repository; the PDFs stay on your computer.
+The five PDFs directly in `sample_library/` are **synthetic** battery papers, used by the tests and
+as an offline fallback. They were written for this workshop with invented data. Do not cite them.
 
 ## Keep going
 

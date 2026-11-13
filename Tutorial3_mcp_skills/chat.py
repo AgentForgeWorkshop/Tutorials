@@ -2,7 +2,7 @@
 """A small AI app in your terminal that uses your MCP server. Needs an API key in .env.
 
     python chat.py                         chat until you type quit
-    python chat.py "A cell keeps 412 of 487 mAh. What is the retention?"
+    python chat.py "What do my papers say about semiconductor materials?"
 
 Claude Desktop and Claude Code run this same loop for you:
     1. Tell the model which tools exist. The list comes straight from MCP.
@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -98,7 +99,7 @@ async def main() -> None:
         llm = openai.OpenAI(api_key=settings.llm_api_key, base_url=settings.base_url)
         turn = chat_completions_turn if settings.base_url else openai_turn
 
-    async with Client(StdioServerParameters(command=sys.executable, args=[str(SERVER)])) as client:
+    async with Client(StdioServerParameters(command=sys.executable, args=[str(SERVER)], env=dict(os.environ))) as client:
         tools = (await client.list_tools()).tools
         print(f"Connected to research-mcp: {len(tools)} tools. Model: {settings.model} ({settings.provider_name})\n")
         messages: list = []

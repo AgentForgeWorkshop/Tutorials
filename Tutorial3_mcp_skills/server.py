@@ -75,7 +75,7 @@ def search_papers(query: str, top_k: int = 5) -> str:
     """Search the user's local document library by keyword.
 
     Returns passages labelled with file name and page number so they can be cited. Use short
-    keyword queries such as "interlayer cycle life". Search matches words, not meanings, so
+    keyword queries such as "band gap". Search matches words, not meanings, so
     try other words if results are thin.
     """
     library = get_library()
@@ -152,7 +152,7 @@ def calculate(expression: str) -> str:
 
     Allowed: numbers, + - * / ** %, parentheses, sqrt, log (natural), log10, exp, sin, cos, tan,
     abs, round, min, max, and the constants pi, e, F (Faraday, C/mol), R (gas constant,
-    J/(mol K)), NA (Avogadro, 1/mol). Example: 412/487*100
+    J/(mol K)), NA (Avogadro, 1/mol). Example: 1239.84/3.4
     """
     try:
         return calc.calculate(expression)

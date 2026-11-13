@@ -19,8 +19,8 @@ from .online import Paper, merge_papers, search_all
 
 QUERY_SYSTEM = (
     "You turn research questions into literature-database searches. Reply with only a JSON "
-    'array of 2 short keyword queries, for example ["lithium dendrite interlayer", '
-    '"solid electrolyte stack pressure"]. Use technical terms an abstract would contain.'
+    'array of 2 short keyword queries, for example ["ultrawide bandgap power device", '
+    '"gallium oxide breakdown field"]. Use technical terms an abstract would contain.'
 )
 
 REVIEW_SYSTEM = """You write short literature reviews for researchers.

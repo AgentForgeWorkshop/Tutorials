@@ -28,31 +28,31 @@ folder directly; in Claude Code, for example, copy it to `~/.claude/skills/`.
 Run the tool on its own:
 
 ```bash
-python try_server.py calc "412/487*100"
-python try_server.py calc "1*F/(3.6*157.76)"
+python try_server.py calc "1239.84/3.4"
+python try_server.py calc "5.5/3.4"
 python try_server.py calc "__import__('os')"
 ```
 
-✅ **Checkpoint:** `84.5996`, then `169.888` (the theoretical capacity of LiFePO4, in mAh/g), then
-an `ERROR`. Anything that is not arithmetic is refused, so the tool cannot be used to run code.
+✅ **Checkpoint:** `364.659` (the longest wavelength GaN can absorb, in nm), then `1.61765` (how many
+times wider diamond's band gap is), then an `ERROR`. Anything that is not arithmetic is refused, so the tool cannot be used to run code.
 
 Read the skill in `skills/calculator/`:
 
 ```text
 calculator/
 ├── SKILL.md               name, description and the procedure
-├── references/formulas.md battery and materials formulas, read only when needed
+├── references/formulas.md materials formulas, read only when needed
 └── scripts/calc.py        the code, which server.py also uses
 ```
 
 Now ask your app, and watch the tool calls:
 
 ```text
-A pouch cell keeps 412 mAh of its original 487 mAh after 500 cycles.
-What is the capacity retention and the average fade per cycle?
+GaN has a band gap of 3.4 eV and diamond 5.5 eV.
+What is the longest wavelength each can absorb?
 ```
 
-✅ **Checkpoint:** you see `load_skill`, then `calculate` at each step: 84.6% and about 0.031% per cycle.
+✅ **Checkpoint:** you see `load_skill`, then `calculate` at each step: about 365 nm for GaN and 225 nm for diamond.
 
 ## B2. A skill with a checker: lay abstracts
 
@@ -71,13 +71,13 @@ words**, a **Flesch-Kincaid grade** above 10, **sentences** over 25 words, **pos
 Test the checker on its own:
 
 ```bash
-python try_server.py lay paper5
+python try_server.py lay Wong
 ```
 
 Then send a document, in one of three ways:
 
 ```text
-Write a lay abstract of paper5 for first-year students.
+Write a lay abstract of the Wong et al. review for first-year students.
 ```
 
 ```text

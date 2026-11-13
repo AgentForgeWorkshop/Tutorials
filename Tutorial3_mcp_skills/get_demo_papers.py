@@ -72,7 +72,7 @@ def main(folder: Path = FOLDER) -> int:
     print("\nNot downloadable by script (no free copy). If your institution has access:")
     for title, doi in NO_FREE_COPY:
         print(f"  - {title}\n    https://doi.org/{doi}")
-    print("\nThese papers are now part of sample_library, so search finds them alongside the practice papers.")
+    print(f"\nNext: run python setup_workshop.py and press Enter to use this folder:\n  {folder}")
     return 1 if failures else 0
 
 

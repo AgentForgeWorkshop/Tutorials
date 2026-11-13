@@ -24,13 +24,13 @@ The setup makes one tiny test request and tells you whether your key works.
 In your AI app:
 
 ```text
-Use review_online_literature: do interlayers still suppress lithium dendrites at high stack pressure?
+Use review_online_literature: what limits ultrawide-bandgap semiconductors in power electronics?
 ```
 
 Or from the terminal:
 
 ```bash
-python try_server.py review "Do interlayers suppress lithium dendrites at high stack pressure?"
+python try_server.py review "What limits ultrawide-bandgap semiconductors in power electronics?"
 ```
 
 ✅ **Checkpoint:** a short answer, a table with [n] citations, disagreements, gaps, and a reference list.
@@ -51,7 +51,7 @@ question -> [AI] search queries -> [code] search databases (MCP)
 Now the same idea on your own papers, driven by a skill instead of one tool:
 
 ```text
-Use the literature-review skill: do my papers agree on stack pressure versus interlayers?
+Use the literature-review skill: what do my papers say about semiconductor materials?
 ```
 
 Watch the tool calls. The skill makes the agent:
@@ -62,8 +62,8 @@ Watch the tool calls. The skill makes the agent:
 4. `read_skill_file`: open the grading rubric, only when it starts grading
 5. `calculate`: check any number it derives
 
-✅ **Checkpoint:** an evidence table with grades, the disagreement between papers 1 and 5 flagged, and
-a verdict with a confidence level.
+✅ **Checkpoint:** a table of the material families in your papers (what each is for, and what limits
+it), cited by file and page, with a verdict and a confidence level.
 
 **MCP gives it the papers; the skill gives it the method.** These are the same tools as in Part A,
 now used in a fixed, repeatable order.

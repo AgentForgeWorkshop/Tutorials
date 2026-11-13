@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parent
 ENV_FILE = ROOT / ".env"
 SERVER = ROOT / "server.py"
 SAMPLE = ROOT / "sample_library"
+DEMO = SAMPLE / "demo_semiconductors"   # filled by get_demo_papers.py
 EXTENSIONS = {".pdf", ".txt", ".md"}
 
 
@@ -59,10 +60,11 @@ def write_env(values: dict[str, str]) -> None:
 def ask_library(current: str) -> str:
     print("\n1. YOUR LIBRARY")
     print("   Paste the path to your folder of PDFs, or drag the folder into this window.")
-    print(f"   Press Enter to keep: {current or SAMPLE}")
+    default = current or (str(DEMO) if DEMO.is_dir() and any(DEMO.glob("*.pdf")) else str(SAMPLE))
+    print(f"   Press Enter to keep: {default}")
     while True:
         raw = input("   Folder: ").strip()
-        folder = clean_path(raw) if raw else Path(current or SAMPLE)
+        folder = clean_path(raw) if raw else Path(default)
         if not folder.is_dir():
             print(f"   That is not a folder: {folder}. Please try again.")
             continue

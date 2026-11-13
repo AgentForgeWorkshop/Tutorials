@@ -9,11 +9,12 @@ pick them).
 
 ## A1. Discover what your server offers
 
-If you have not run the setup yet, do it first: see the [README](../README.md#quick-start).
+If you have not run the setup yet, do it first: see the [README](../README.md#quick-start). It downloads three real
+review papers on semiconductors (`python get_demo_papers.py`), the same papers as in the talk.
 
 ```bash
 python try_server.py
-python try_server.py local "stack pressure"
+python try_server.py local "band gap"
 ```
 
 ✅ **Checkpoint:** you see 11 tools, 1 resource and 2 prompts, then passages labelled with a file
@@ -59,7 +60,7 @@ What documents are in my library?
 ```
 
 ```text
-Do my papers agree on stack pressure versus interlayers? Cite the file and page.
+What do my papers say about semiconductor materials? Cite the file and page.
 ```
 
 ✅ **Checkpoint:** the answer cites pages, and you can open the PDF and confirm them.
@@ -86,7 +87,7 @@ model still use the tool well?
 The same server also reaches online databases. No AI key is needed for search:
 
 ```bash
-python try_server.py online "lithium dendrite interlayer"
+python try_server.py online "ultrawide bandgap semiconductor power electronics"
 ```
 
 ✅ **Checkpoint:** real papers with links and abstracts, from OpenAlex, arXiv and Europe PMC.
@@ -96,22 +97,17 @@ python try_server.py online "lithium dendrite interlayer"
 > arXiv and Europe PMC. Get a key at [openalex.org/settings/api](https://openalex.org/settings/api)
 > and paste it into `python setup_workshop.py`.
 
-## Practise with real papers (optional)
+## About the papers
 
-Add three real review papers on semiconductors to the practice library:
-
-```bash
-python get_demo_papers.py
-```
-
-They are free author versions, downloaded from arXiv and OSTI.gov into
+The three papers are free author versions of published reviews (Wong et al. 2021, Woods-Robinson
+et al. 2020, Yue et al. 2020), downloaded from arXiv and OSTI.gov into
 `sample_library/demo_semiconductors/`. Git ignores that folder, because publishers' PDFs must not be
-shared publicly: the repository keeps only the links. Then try:
+shared publicly: the repository keeps only the links. Page numbers differ from the journal versions.
+
+Then try:
 
 ```text
 Which semiconductors in my library have the widest band gaps, and what limits their use?
 ```
-
-The extra papers change which search results come first, so add them after the checkpoints above.
 
 **Next:** [Part B · Agent Skills](B-skills.md)
