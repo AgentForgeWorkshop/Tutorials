@@ -1,6 +1,6 @@
-# Step 5: Literature review with Valency in ChatGPT
+# Part D · MCP on a platform: Valency in ChatGPT
 
-**Goal:** see the other kind of MCP server, hosted by someone else and used with no code.
+**Goal:** see the other kind of MCP server, hosted by someone else and used with no code. About 6 minutes.
 
 [Valency](https://www.valency.io/) offers an MCP server called
 [MCP Bond](https://www.valency.io/bond/). It searches over 500 million research papers, including
@@ -14,7 +14,7 @@ arXiv, bioRxiv, medRxiv and PubMed, through 36 tools.
 | Sees | Your own files | Published literature |
 | Works in ChatGPT | No | **Yes** |
 
-## 5.1 Connect it
+## D1. Connect it
 
 These steps follow [Valency's ChatGPT guide](https://docs.valency.io/guides/chatgpt/). Menu names
 change, so check that page if yours looks different.
@@ -39,7 +39,7 @@ Use Valency to list the sources it can search.
 > **Free limits:** Valency lists 100 calls a day for an unverified individual account, and 1,000 a
 > week after you verify a work email. A single review can use several calls.
 
-## 5.2 A small literature review
+## D2. A literature review in four prompts
 
 Send these one at a time and watch which tools are called.
 
@@ -73,13 +73,13 @@ Export the papers you used as BibTeX with Valency.
 ✅ **Checkpoint:** you have a table and a BibTeX list. **Open three links and check that the
 papers exist and say what the table claims.**
 
-## 5.3 What to notice
+## What to notice
 
 - You wrote no code and installed nothing. This is what "write once, use from any host" means in practice.
 - Your server and Valency speak the same protocol. Only the transport and the sign-in differ.
 - The model chooses which of the 36 tools to call, so a good tool description really matters.
 
-## 5.4 Same server in Claude
+## Same server in Claude
 
 From [Valency's Claude guide](https://docs.valency.io/guides/claude/): in the Claude apps, open
 [claude.ai/directory/valency](https://claude.ai/directory/valency) and choose **Connect to Claude**.
@@ -102,4 +102,4 @@ Compare what my library says about stack pressure with what Valency finds in the
 literature. Where is my library behind the field?
 ```
 
-**Done!** See the [README](../README.md#keep-going) for ideas to take into your hackathon.
+**Next:** [Part E · Decide](E-decide.md)

@@ -39,7 +39,7 @@ the problem is in your Python setup.
 | `spawn ... ENOENT` | A path in the config is wrong. Run the setup again and use the paths it prints |
 | macOS: the folder cannot be read from Claude Desktop | Allow access in System Settings → Privacy & Security → Files and Folders, or move the folder out of Documents, Desktop or Downloads |
 | `claude mcp list` shows "Failed to connect" | Run the printed command again from the workshop folder with the environment active |
-| ChatGPT cannot use `research-mcp` | Expected. ChatGPT needs a server on the internet, not on your laptop. See [Step 5](05-valency-chatgpt.md) |
+| ChatGPT cannot use `research-mcp` | Expected. ChatGPT needs a server on the internet, not on your laptop. See [Part D](D-platform.md) |
 
 ## API keys
 

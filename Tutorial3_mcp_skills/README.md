@@ -6,15 +6,17 @@
 
 Can't install it on your laptop? Use the Colab version instead: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AgentForgeWorkshop/Tutorials/blob/main/Tutorial3_mcp_skills/03_mcp_skills_colab.ipynb)
 
-By the end you will have an MCP server running on your laptop that gives your AI app four abilities:
+You will build both halves of a capable research agent: **MCP** for access (what it can reach) and
+**Agent Skills** for the workflow (how it does the job). Five parts, in the order of the talk:
 
-| Step | What you add | You provide | Time |
+| Part | What you do | You provide | Time |
 |---|---|---|---|
-| [1. Local library](docs/01-local-library.md) | Search and read your own PDFs, with page citations | The path to your folder | 15 min |
-| [2. Online literature](docs/02-online-literature.md) | A cited review of published papers | Your API key | 10 min |
-| [3. Calculator skill](docs/03-calculator-skill.md) | Exact arithmetic, plus the know-how to use it | Nothing | 5 min |
-| [4. Lay abstract](docs/04-lay-abstract.md) | Plain-language summaries that are checked, not just written | A document | 10 min |
-| [5. Valency in ChatGPT](docs/05-valency-chatgpt.md) | A hosted MCP server across 500M+ papers, with no code | A free Valency sign-in | 5 min |
+| Setup | Install, choose your folder, paste your key ([Quick start](#quick-start)) | Your folder | 6 min |
+| [A · MCP](docs/A-mcp-access.md) | Discover your server, connect your app, search your papers and the literature | Nothing | 10 min |
+| [B · Agent Skills](docs/B-skills.md) | A calculator skill and a checked lay abstract; progressive disclosure | Nothing | 10 min |
+| [C · Together](docs/C-together.md) | A cited literature review: MCP access plus a skill's method | Your API key | 8 min |
+| [D · Platform](docs/D-platform.md) | Valency, a hosted MCP server, in ChatGPT with no code | A free Valency sign-in | 6 min |
+| [E · Decide](docs/E-decide.md) | MCP, a skill, or both? For your own research tasks | Nothing | 3 min |
 
 Something not working? See [Troubleshooting](docs/troubleshooting.md).
 
@@ -49,7 +51,7 @@ No git? On [the Tutorials page](https://github.com/AgentForgeWorkshop/Tutorials)
 The setup asks for your library folder (you can drag it into the terminal) and your API key: the
 same OpenRouter key as in Tutorial 1, a free Google AI Studio key, or an Anthropic or OpenAI key. Both
 are saved in `.env` on your computer, which git ignores. It then prints how to connect your AI
-app. **Then start with [Step 1](docs/01-local-library.md).**
+app. **Then start with [Part A](docs/A-mcp-access.md).**
 
 ## How it fits together
 
@@ -67,7 +69,7 @@ app. **Then start with [Step 1](docs/01-local-library.md).**
 | `setup_workshop.py` | Asks for your folder and key, then shows how to connect your app |
 | `try_server.py` | Calls the server directly, with no AI, for testing |
 | `chat.py` | A small AI app for your terminal, if you have no other |
-| `03_mcp_skills_colab.ipynb` | The same steps in Google Colab, with nothing to install |
+| `03_mcp_skills_colab.ipynb` | The same parts in Google Colab, with nothing to install |
 | `sample_library/` | Five practice papers |
 | `get_demo_papers.py` | Downloads three real, freely available papers into `sample_library/` (optional) |
 | `tests/` | `pip install -r requirements-dev.txt`, then `python -m pytest` (no key or internet needed) |
