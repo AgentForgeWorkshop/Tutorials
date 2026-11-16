@@ -132,13 +132,22 @@ def add_to_claude_desktop() -> None:
 def print_connection_guide() -> None:
     quote = (lambda s: f'"{s}"') if os.name == "nt" else shlex.quote
     block = {"mcpServers": {"research-mcp": {"command": sys.executable, "args": [str(SERVER)]}}}
+    py, srv = quote(sys.executable), quote(str(SERVER))
     print("\n4. CONNECT YOUR AI APP (pick one)")
     print("\n   Claude Code:")
-    print(f"     claude mcp add --scope user research-mcp -- {quote(sys.executable)} {quote(str(SERVER))}")
-    print("\n   Claude Desktop, Cursor or VS Code: add this to the app's MCP settings:")
+    print(f"     claude mcp add --scope user research-mcp -- {py} {srv}")
+    print("     claude mcp list")
+    print("\n   Gemini CLI:")
+    print(f"     gemini mcp add --scope user research-mcp {py} {srv}")
+    print("\n   OpenAI Codex CLI:")
+    print(f"     codex mcp add research-mcp -- {py} {srv}")
+    print("\n   Claude Desktop, Cursor or Windsurf: add this to the app's MCP settings")
+    print("   (VS Code: the same block, with the key \"servers\" in place of \"mcpServers\"):")
     print("     " + json.dumps(block, indent=2).replace("\n", "\n     "))
     print("\n   No AI app? Use the terminal chat included here (needs an API key):")
-    print(f"     {quote(sys.executable)} chat.py")
+    print(f"     {py} chat.py")
+    print("\n   ChatGPT, claude.ai and phone apps can't start a program on your laptop;")
+    print("   they reach only servers on the internet (Part D).")
 
 
 def main() -> None:

@@ -20,7 +20,9 @@ the problem is in your Python setup.
 | `python` opens the Microsoft Store (Windows) | Use `py` |
 | PowerShell blocks `Activate.ps1` | Run `Set-ExecutionPolicy -Scope Process RemoteSigned`, then activate again |
 | `cannot import name 'MCPServer'` | You have the old MCP SDK. Activate the environment and reinstall the requirements |
-| Python older than 3.10 | Install a newer version from [python.org](https://www.python.org/downloads/) |
+| Python older than 3.10 | Install a newer version from [python.org](https://www.python.org/downloads/), then make the environment with it: `python3.12 -m venv .venv` |
+| `No matching distribution found for mcp` | Your Python is older than 3.10 (macOS's built-in Python is 3.9). Delete `.venv` and make it again with a newer Python, as above |
+| `Could not open requirements file` | You are in the wrong folder. `cd` into `Tutorial3_mcp_skills` first |
 
 ## Library
 
@@ -39,6 +41,7 @@ the problem is in your Python setup.
 | `spawn ... ENOENT` | A path in the config is wrong. Run the setup again and use the paths it prints |
 | macOS: the folder cannot be read from Claude Desktop | Allow access in System Settings → Privacy & Security → Files and Folders, or move the folder out of Documents, Desktop or Downloads |
 | `claude mcp list` shows "Failed to connect" | Run the printed command again from the workshop folder with the environment active |
+| `claude`, `gemini` or `codex`: command not found | That app isn't installed. Pick another app from [A2](A-mcp-access.md#a2-connect-your-ai-app-and-ask), or use `python chat.py` |
 | ChatGPT cannot use `research-mcp` | Expected. ChatGPT needs a server on the internet, not on your laptop. See [Part D](D-platform.md) |
 
 ## API keys

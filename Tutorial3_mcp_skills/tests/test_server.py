@@ -375,6 +375,17 @@ def test_setup_leaves_a_broken_desktop_config_alone(tmp_path, monkeypatch):
     assert config.read_text(encoding="utf-8") == "{broken"
 
 
+def test_setup_prints_a_connection_line_for_each_local_app(capsys):
+    import setup_workshop as setup
+
+    setup.print_connection_guide()
+    out = capsys.readouterr().out
+    for line in ("claude mcp add --scope user research-mcp --", "gemini mcp add --scope user research-mcp",
+                 "codex mcp add research-mcp --", '"mcpServers"', "chat.py", "ChatGPT"):
+        assert line in out, line
+    assert str(ROOT / "server.py") in out or str(ROOT / "server.py").replace("\\", "/") in out
+
+
 # ---- chat.py against fake model APIs: the loop, the MCP calls and the SDK usage --------------
 class FakeModelAPI(BaseHTTPRequestHandler):
     """First reply asks for the calculate tool. Second reply, sent once the tool's result has

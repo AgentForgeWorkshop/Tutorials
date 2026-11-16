@@ -60,8 +60,8 @@ app. **Then start with [Part A](docs/A-mcp-access.md).**
 
 ```text
  Your AI app  <--- MCP --->  server.py  ---> your folder of documents
- Claude, Cursor,             11 tools   ---> OpenAlex, arXiv, Europe PMC
- VS Code, chat.py            3 skills   ---> your AI API key, for automatic reviews
+ Claude, Cursor, VS Code,    11 tools   ---> OpenAlex, arXiv, Europe PMC
+ Gemini CLI, Codex, chat.py  3 skills   ---> your AI API key, for automatic reviews
 ```
 
 | File | What it does |

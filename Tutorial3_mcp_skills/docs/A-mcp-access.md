@@ -29,31 +29,90 @@ To use another folder of papers, run `python setup_workshop.py` again or edit `L
 
 ## A2. Connect your AI app and ask
 
-The setup printed these commands with the correct paths for your computer. Choose one.
+### Which apps can use your server?
 
-**Claude Desktop.** Answer `y` when the setup offers to add the server, or go to
-**Settings → Developer → Edit Config** and paste the printed block. Then fully quit and reopen the app.
+Your server is a program on your laptop, so only apps that also run on your laptop can start it.
 
-**Claude Code.** Run the printed `claude mcp add` command, then check it:
+| Can start your local server | How |
+|---|---|
+| Claude Desktop | Answer `y` in the setup, or **Settings → Developer → Edit Config** |
+| Claude Code | `claude mcp add` |
+| Cursor, Windsurf | Paste the printed JSON block into the MCP settings |
+| VS Code (Copilot agent mode) | The same block, with the key `servers` in place of `mcpServers` |
+| Gemini CLI | `gemini mcp add` |
+| OpenAI Codex CLI | `codex mcp add` |
+| `chat.py`, in this folder | Any model, with your API key |
+
+| Can't start it | Why |
+|---|---|
+| ChatGPT (web, desktop and mobile) | It reaches only remote servers over HTTPS. That is [Part D](D-platform.md). |
+| claude.ai in a browser, Claude mobile | Remote connectors only. Claude Desktop, on your laptop, can. |
+| Other browser chats and phone apps | They have no way to start a program on your laptop. |
+
+To use your server from those apps, it would have to run on the internet over HTTPS, with sign-in,
+like Valency in Part D.
+
+### Connect one app, step by step
+
+The setup printed these commands with the full paths for your computer. You can also type them
+yourself: `$PWD` fills in the folder you are in.
+
+**1. Go to the folder and switch on the environment** (use your own path):
+
+```bash
+cd ~/Tutorials/Tutorial3_mcp_skills
+```
+
+```bash
+source .venv/bin/activate
+```
+
+On Windows PowerShell: `.venv\Scripts\Activate.ps1`, and write `$PWD\.venv\Scripts\python.exe`
+wherever the commands below say `"$PWD/.venv/bin/python"`.
+
+**2. Connect one app.**
+
+*Claude Code:*
+
+```bash
+claude mcp add --scope user research-mcp -- "$PWD/.venv/bin/python" "$PWD/server.py"
+```
 
 ```bash
 claude mcp list
 ```
 
-**Cursor or VS Code.** Paste the printed block into the app's MCP settings. VS Code uses the key
-`servers` in place of `mcpServers`.
+You should see `research-mcp: ... connected`. Then start `claude`.
 
-**No AI app, but you have an API key** (for example your OpenRouter key from Tutorial 1). Use the
-terminal chat:
+*Gemini CLI:*
+
+```bash
+gemini mcp add --scope user research-mcp "$PWD/.venv/bin/python" "$PWD/server.py"
+```
+
+*OpenAI Codex CLI:*
+
+```bash
+codex mcp add research-mcp -- "$PWD/.venv/bin/python" "$PWD/server.py"
+```
+
+*Claude Desktop:* run the setup again and answer `y`, then fully quit and reopen the app.
+
+```bash
+python setup_workshop.py
+```
+
+*Cursor, Windsurf or VS Code:* paste the JSON block the setup printed into the app's MCP settings.
+
+*No AI app, but you have an API key* (for example your OpenRouter key from Tutorial 1):
 
 ```bash
 python chat.py
 ```
 
-> ChatGPT is not on this list because it cannot start a program on your laptop. It connects only
-> to servers on the internet, which is what you will do in [Part D](D-platform.md).
+`command not found` means that app isn't installed: pick another one.
 
-Then ask:
+**3. Start the app and ask:**
 
 ```text
 What documents are in my library?
