@@ -6,9 +6,9 @@ Status as of 2026-11-13. Read this before changing anything; `CLAUDE.md` has the
 
 - **Event:** AgentForge Workshop, Tutorial 5. Slides 1–28 are the talk (why evals; eval in the dev loop;
   what to evaluate = outcome / trace / operational; how = task, grader, metrics, trials; graders =
-  code / LLM judge / human; benchmarks; pass@k and pass^k). The hands-on (~45 min) has **no slides**: participants follow `Tutorial5_evals/README.md` (the participant guide) and the notebook (decided 2026-11-17).
+  code / LLM judge / human; benchmarks; pass@k and pass^k). The hands-on (~45 min) has **no slides**: people follow the guide in `Tutorial5_evals/README.md` and the notebook version (decided 2026-11-17).
 - **Example 1** (built here): a weekly **paper-triage agent** for a fictional microplastics lab, and its eval.
-  Shown live by the instructor (LangSmith) and done by participants in a Colab notebook.
+  Shown live in LangSmith (script version) and done hands-on in a Colab notebook (notebook version).
 - **Example 2** (not built): a 3–4 minute *teaser* only — a literature-review agent on Claude Code
   (open-ended output, live web, LLM judge + must-cite list + citation checks). Pre-run, show results.
 - Previous tutorials live in the GitHub org `AgentForgeWorkshop/Tutorials` (Tutorial 1 = `01a_what_is_an_agent.ipynb`:
@@ -20,7 +20,7 @@ Status as of 2026-11-13. Read this before changing anything; `CLAUDE.md` has the
 | Topic | Decision |
 |---|---|
 | Task | Each week: read new papers, label each paper per project as **core / related / not relevant**, save decisions, send one digest. |
-| Projects | One story, *measure → understand → capture*: **P1** detecting small MPs (1–20 µm) in drinking water; **P2** MP transport from urban rivers to the estuary; **P3** capturing MPs from water **with biochar** (P3 was "effects on invertebrates" earlier; changed by the instructor). |
+| Projects | One story, *measure → understand → capture*: **P1** detecting small MPs (1–20 µm) in drinking water; **P2** MP transport from urban rivers to the estuary; **P3** capturing MPs from water **with biochar** (P3 was "effects on invertebrates" earlier; changed later). |
 | Relevance | **core** = advances an aim; **related** = the lead would *compare / borrow / cite* it; **not relevant** = only "also about MPs", or same material but different task (biochar for cadmium). Written in `data/projects.md` — the single spec used by prompt v2 *and* by the labels. |
 | Acceptable extras | Per paper, extra projects an expert could defend; graders don't penalise them. |
 | Data | 50 real abstracts (bioRxiv, ChemRxiv, EarthArXiv, arXiv; PubMed for open-access CC BY journals — MDPI, Frontiers, Beilstein). Found with the Valency papers connector. Many deliberate near-misses (biochar for nutrients/cadmium/soil, other capture materials, ocean transport, tadpoles…). |
@@ -35,8 +35,8 @@ Status as of 2026-11-13. Read this before changing anything; `CLAUDE.md` has the
 | Models | Through OpenRouter with `langchain-openai` (`init_chat_model("openai:<id>", base_url="https://openrouter.ai/api/v1")`). Agent/workflow: `openai/gpt-5-mini`. Judge: `openai/gpt-5.6-terra`. No temperature set (gpt-5 models need the default; trials need natural variation). |
 | Keys | `get_key()`: Colab Secrets → env / `.env` → prompt. Never paste keys into cells. |
 | Versions | `langchain==1.4.2`, `langchain-openai==1.6.2` (same as Tutorial 1), Python ≥ 3.11, uv + `uv.lock`. |
-| Repos | Everything (instructor code, harness, tests, scripts) lives in the **public** `AgentForgeWorkshop/Tutorials` repo under `Tutorial5_evals/hands-on/`; the participant notebook + CSV data are generated into `notebook/` there (changed 2026-11-17; was a separate private repo). The notebook loads data from GitHub pinned to tag **`tutorial5-v1`**. |
-| Simplicity | The instructor wants the simplest code that does the job. Prefer deleting over adding. |
+| Repos | Everything (script version: harness, tests, scripts) lives in the **public** `AgentForgeWorkshop/Tutorials` repo under `Tutorial5_evals/hands-on/`; the notebook version + CSV data are generated into `notebook/` there (changed 2026-11-17; was a separate private repo). The notebook loads data from GitHub pinned to tag **`tutorial5-v1`**. |
+| Simplicity | Use the simplest code that does the job. Prefer deleting over adding. |
 
 ## 3. Demo story and run sheet (45 min)
 
@@ -49,23 +49,23 @@ Status as of 2026-11-13. Read this before changing anything; `CLAUDE.md` has the
 | 25–31 | Improve the eval: same runs re-scored with answer key v1 vs v2 | loop step 6 |
 | 31–38 | Agent v2 vs LLM workflow: quality, consistency, cost → decision | slide 8 |
 | 38–42 | Example 2 teaser | 16, 17, 26 |
-| 42–45 | Wrap + participant notebook | — |
+| 42–45 | Wrap + notebook version | — |
 
 ## 4. Where things are
 
 ```
 data/                       SOURCE OF TRUTH (JSON + projects.md)
-example1/                   instructor code: env, prompts, agent, workflow, graders, harness
+example1/                   script version: env, prompts, agent, workflow, graders, harness
 tests/                      pytest (free)
-example1/langsmith_eval.py  the same eval as LangSmith experiments (instructor demo)
+example1/langsmith_eval.py  the same eval as LangSmith experiments (demo)
 scripts/build_public.py     generates notebook/ (notebook + CSVs + data README)
 scripts/check_public_notebook.py   executes that notebook with real models, compares with example1/
 scripts/make_tasks.py       regenerates data/tasks.json (repost config inside)
 scripts/build_review_page.py       HTML view of the answer key for checking labels
-notebook/                   GENERATED — participant notebook + data
+notebook/                   GENERATED — notebook version + data
 ```
 
-The participant notebook's code is a readable copy of `example1/` (same logic, written inline for teaching).
+The notebook version's code is a readable copy of `example1/` (same logic, written inline for teaching).
 `check_public_notebook.py` proves they agree (graders and answer keys: 0 mismatches).
 
 ## 5. How to
@@ -81,14 +81,14 @@ uv run python -m example1.harness errors results/agent-v1.jsonl
 uv run python scripts/build_public.py && uv run python scripts/check_public_notebook.py
 ```
 
-**Publish the participant folder**
+**Publish the notebook version**
 1. Rebuild `notebook/`, commit, merge to `main` of `AgentForgeWorkshop/Tutorials`.
 2. Create and push the tag: `git tag tutorial5-v1 && git push origin tutorial5-v1`
    (the notebook's data URLs only work once the tag exists).
 3. Open the notebook from its Colab badge and run it once
 4. Data changed later? Bump `DATA_TAG` in `scripts/build_public.py`, rebuild, commit, tag again.
 
-## 6. Results so far (instructor's first real run of the participant notebook)
+## 6. Results so far (first real run of the notebook version, 13 Nov)
 
 8 weeks × 3 trials, gpt-5-mini agent, gpt-5.6-terra judge. **The workflow column is from before the
 workflow's prompt and input were aligned with the agent's** — re-run it.
@@ -118,12 +118,12 @@ workflow's prompt and input were aligned with the agent's** — re-run it.
 
 1. Publish the public folder + tag; test from the Colab badge with a real key.
 2. Re-run the aligned workflow; update the Step 7 text and the slide with what it shows.
-3. Instructor LangSmith demo — **script written: `example1/langsmith_eval.py`** (see README). Run `upload`, then
+3. LangSmith demo — **script written: `example1/langsmith_eval.py`** (see README). Run `upload`, then
    the three experiments before the session, then `rescore` the agent-v2 experiment; pin agent-v1 as baseline
    and use Compare. Do one live run during the talk. Tested offline against a stub server (24 runs per
    experiment, all scores and pass@k/pass^k correct); **not yet run against real LangSmith**, and `rescore`
    (evaluating an existing experiment) could not be tested offline at all — check it first.
-4. ~~Slides 30–39~~ dropped: the participant guide `Tutorial5_evals/README.md` replaces them. Still check the talk's backup slide on pass^k (exact estimator C(c,k)/C(n,k) gives 30% where (pass@1)^k gives 36% for n=5, c=3, k=2).
+4. ~~Slides 30–39~~ dropped: the guide in `Tutorial5_evals/README.md` replaces them. Still check the talk's backup slide on pass^k (exact estimator C(c,k)/C(n,k) gives 30% where (pass@1)^k gives 36% for n=5, c=3, k=2).
 5. Judge calibration: label ~10 verdicts by hand; consider a judge from another model family.
 6. Example 2 teaser: build and pre-run (needs an Anthropic key; Claude Code doesn't run through OpenRouter).
 7. Optional: 5 trials instead of 3 for firmer comparisons; check gpt-5.6-terra cost.

@@ -3,7 +3,7 @@
     python scripts/export_public_data.py [out_dir]     (default: notebook/data)
 
 Writes README.md (data card), projects.md, papers.csv, answer_key.csv, answer_key_v1.csv, tasks.json.
-CSV renders as a searchable table on GitHub and loads with pandas; the participant notebook reads these.
+CSV renders as a searchable table on GitHub and loads with pandas; the notebook version reads these.
 """
 import csv
 import json
@@ -111,6 +111,6 @@ Abstracts were retrieved from preprint servers (bioRxiv, ChemRxiv, EarthArXiv, a
 (open-access journals: MDPI, Frontiers, Beilstein). Each row keeps the authors, link and licence; all are
 Creative Commons licences, and the abstracts are reproduced unchanged except for whitespace and markup
 clean-up, for non-commercial teaching. The project descriptions are fictional; the labels were written for
-this tutorial and reviewed by the instructor.
+this tutorial and reviewed by the tutorial author.
 """)
 print("wrote", sorted(f.name for f in OUT.iterdir()), "to", OUT)

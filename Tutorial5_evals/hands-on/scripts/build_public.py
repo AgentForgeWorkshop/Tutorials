@@ -1,4 +1,4 @@
-"""Build the participant folder notebook/: the participant notebook + its data.
+"""Build notebook/: the notebook version + its data.
 
     python scripts/build_public.py   ->  notebook/
         05_evaluating_a_triage_agent.ipynb   (loads its data from GitHub, pinned to DATA_TAG)

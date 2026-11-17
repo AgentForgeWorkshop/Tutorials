@@ -1,4 +1,4 @@
-"""Example 1 as LangSmith experiments (instructor demo).
+"""Example 1 as LangSmith experiments (LangSmith demo).
 
 One experiment = one version of the system run over the 8 weekly tasks, 3 times each (repetitions).
 Compare versions in the UI: Datasets & Experiments -> mp-triage-weeks -> select experiments -> Compare.

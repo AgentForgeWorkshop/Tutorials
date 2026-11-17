@@ -134,6 +134,6 @@ Traces of runs inside an experiment live in the experiment, not in the tracing p
 
 - The **exercises** at the end of the notebook: find out whether a failure is the agent's fault or the
   answer key's, add your own grader, try a cheaper model, check the judge against your own verdicts.
-- The full **instructor version** is in [`hands-on/`](hands-on/): the same agent, graders and harness as
+- The **script version** is in [`hands-on/`](hands-on/): the same agent, graders and harness as
   Python modules, a command-line harness, the LangSmith experiments, and tests. Start with
   [`hands-on/README.md`](hands-on/README.md).

@@ -30,15 +30,15 @@ example1/
 tests/             pytest, no API keys needed
 scripts/
   make_tasks.py             rebuilds data/tasks.json from papers.json
-  build_public.py           writes notebook/ (participant notebook + CSV data + data README)
+  build_public.py           writes notebook/ (notebook version + CSV data + data README)
   check_public_notebook.py  runs that notebook with real models (local data) and checks it against example1/
   build_review_page.py      HTML page of the answer key, for checking labels by eye
-notebook/                   GENERATED — the participant notebook + data (opened from Colab)
+notebook/                   GENERATED — the notebook version + data (opened from Colab)
 ```
 
 See **HANDOFF.md** for the full context, decisions, results so far and next steps.
 
-## Participant notebook (public)
+## Notebook version
 
 `notebook/05_evaluating_a_triage_agent.ipynb` walks through the same eval in plain Python:
 task and data, the agent and its trace, graders, the harness (pass@k / pass^k), prompt v1 vs v2,
@@ -62,7 +62,7 @@ uv run pytest -q            # sanity check, free
 Then prefix commands with `uv run`, e.g. `uv run python -m example1.harness run ...`.
 Without uv: `python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt`.
 
-In **Colab** you don't need uv: the participant notebook installs what it needs with `pip` in its first cell.
+In **Colab** you don't need uv: the notebook version installs what it needs with `pip` in its first cell.
 
 ## Run the evals
 
@@ -79,7 +79,7 @@ uv run python -m example1.harness errors  results/agent-v1.jsonl               #
 
 With `LANGSMITH_TRACING=true` and a LangSmith key in `.env`, every run's trace appears in LangSmith.
 
-## LangSmith experiments (instructor demo)
+## LangSmith experiments (demo)
 
 One experiment = one version of the system on the 8 weekly tasks, 3 repetitions each.
 

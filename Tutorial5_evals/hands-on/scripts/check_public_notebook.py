@@ -1,4 +1,4 @@
-"""Run the generated participant notebook end to end with real models, and check it against example1/.
+"""Run the generated notebook version end to end with real models, and check it against example1/.
 
     uv run python scripts/check_public_notebook.py
 
