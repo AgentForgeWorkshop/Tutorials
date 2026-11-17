@@ -1,0 +1,537 @@
+{
+  "MP004": {
+    "labels": {
+      "P2": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Field survey of an urban river near Vienna: MP deposition in sediments is controlled by sedimentary facies and season (backwater deposits up to ~15,500 MP/kg) — directly informs P2 Aim 2 (deposition hotspots)."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP001": {
+    "labels": {
+      "P1": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "MP concentrations (~39 particles/L, mostly PET fibres, FTIR-confirmed) in ten bottled-water brands — reference values for P1, although the size data are coarser than P1's 1–20 µm target."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP005": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "easy",
+    "note": "Toxicity of MP chemicals to Daphnia — an effects study; none of the projects covers biological effects."
+  },
+  "MP002": {
+    "labels": {
+      "P1": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Raman counts of MPs down to 1 µm in bottled and tap water with blank and recovery correction; 98% of particles were <20 µm — reference values and a QA/QC approach for P1's 1–20 µm method (Aims 2–3)."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP041": {
+    "labels": {
+      "P2": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Archived sediment cores from Great Bay Estuary: MP occurrence (~116 particles/g) and a decadal accumulation trend; hydrodynamic modelling shows bed shear stress controls where MPs settle — estuary deposition for P2 Aim 2."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP003": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "easy",
+    "note": "Human platelet / cardiovascular effects of nanoplastics — human health is out of scope for all projects."
+  },
+  "MP020": {
+    "labels": {
+      "P3": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P3": "Chitosan-coated loofah filter removes >96% of polystyrene particles (500 nm to mm) and keeps working in pond water — a low-cost competitor to compare biochar against."
+    },
+    "difficulty": "hard",
+    "note": "Captures MPs with chitosan-coated loofah, not biochar — related to P3 as a comparison, not core."
+  },
+  "MP007": {
+    "labels": {
+      "P2": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Flume experiments with 3D particle tracking give a transport-stage phase diagram for MP rolling, saltation and suspension — input for P2 Aim 2 transport models."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP010": {
+    "labels": {
+      "P1": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "SNAP workflow: silicon-nitride nanomembranes concentrate drinking-water particles for optical, electron and Raman analysis on one substrate — candidate sample-prep and identification approach for P1 (Aims 1–2)."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP042": {
+    "labels": {
+      "P1": "related",
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Meta-analysis showing grab vs net sampling, sample volume and mesh size shift measured concentrations by orders of magnitude, with contamination the largest bias — informs P1 sampling, blanks and QA/QC (Aims 1 and 3).",
+      "P2": "Warns against comparing river and lake concentrations across surveys that used different sampling methods — directly affects how P2 designs and compares field surveys (Aim 2)."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP009": {
+    "labels": {
+      "P2": "related"
+    },
+    "acceptable": [
+      "P1"
+    ],
+    "reasons": {
+      "P2": "Coastal survey at the downstream end of river systems: rainfall and population drive MP concentrations and MPs sink quickly near the coast — cite as context for where river-borne MPs end up."
+    },
+    "difficulty": "hard",
+    "note": "P1 is debatable: the methods are standard (sieving, density separation, FTIR), but some readers would still want them. Kept as an acceptable extra."
+  },
+  "MP052": {
+    "labels": {
+      "P3": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P3": "Iron-modified sewage-sludge biochar removed up to 96% of nanoplastics; structural equation modelling ranks capture mechanisms (electrostatic 53%, H-bonding, pores, π–π) — P3 Aims 1–2."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP043": {
+    "labels": {
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Review of streambed pollution sources and impacts that names plastics as a major physical pollutant of urban streambeds — context for P2 deposition work (Aim 2)."
+    },
+    "difficulty": "hard",
+    "note": "Broad multi-stressor review; microplastics are only one part."
+  },
+  "MP015": {
+    "labels": {
+      "P1": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "FT-IR spectral-imaging pipeline (image/tile/spectral corrections + cluster-centroid library matching) that improves polymer identification accuracy and speed — P1 Aim 2."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP014": {
+    "labels": {
+      "P2": "related",
+      "P1": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Systematic review of MP occurrence, polymers and sources in Asian rivers (2011–2024) — background and comparison data for P2 field surveys (Aims 1–2).",
+      "P1": "Reviews the sampling, sample-preparation and identification methods used across Asian river studies — cite when comparing method choices."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP049": {
+    "labels": {
+      "P3": "core",
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P3": "Field test of stormwater filter socks: rice-husk biochar removed ~98% of tyre-wear particles on first use (85% on reuse), outperforming woodchips, especially for particles <100 µm — P3 Aims 2–3.",
+      "P2": "Measures tyre-wear particle concentrations in urban stormwater runoff during storms (first-flush peaks) — the input pathway P2 tracks (Aim 1)."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP012": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "medium",
+    "note": "Bio-based nanoplastics reduce the filtration rate of a freshwater clam — 'filtration' here is the animal's feeding, not capture by a material."
+  },
+  "MP013": {
+    "labels": {
+      "P1": "related",
+      "P2": "related",
+      "P3": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Produces photo-aged, 'true-to-life' MP test materials (PS, PP, LDPE, PVC, PET) characterised by FTIR/NIR — realistic reference particles for P1 validation (Aim 3).",
+      "P2": "UV photo-ageing protocol with carbonyl-index tracking for PS, PP, LDPE, PVC and PET — borrow for P2 weathering experiments (Aim 3).",
+      "P3": "Realistic aged test particles, explicitly proposed for assessing remediation — borrow to test biochar capture on weathered rather than pristine particles."
+    },
+    "difficulty": "hard",
+    "note": "Relevant to all three projects, each at the related level."
+  },
+  "MP018": {
+    "labels": {},
+    "acceptable": [
+      "P2"
+    ],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Ocean surface-wave transport. Wave physics could matter in estuaries, so P2 (related) is defensible but not expected."
+  },
+  "MP059": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Biochar + polystyrene MPs, but the target is cadmium adsorption in water and soil. Nothing captures MPs."
+  },
+  "MP058": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Biochar + microplastics, but the biochar captures phosphorus and ammonium; the MPs only change nutrient uptake. Nothing captures MPs."
+  },
+  "MP060": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Biochar offsets MP effects on sugarcane in soil — a soil-amendment study, explicitly out of P3 scope."
+  },
+  "MP017": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Additive-enriched MPs and soil invertebrates — soil and biological effects; out of scope for all projects."
+  },
+  "MP019": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Educational Nile Red counting of 1–5 mm particles in soil — large particles in soil, out of P1 scope."
+  },
+  "MP016": {
+    "labels": {},
+    "acceptable": [
+      "P2"
+    ],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Global ocean model. Its fragmentation-kinetics approach could be borrowed for rivers, so P2 (related) is defensible but not expected."
+  },
+  "MP053": {
+    "labels": {
+      "P3": "core"
+    },
+    "acceptable": [
+      "P2"
+    ],
+    "reasons": {
+      "P3": "Nano-ferric-loaded magnetic biochar removed >90% of PET microfibres from simulated wastewater over pH 4–9 and kept >95% after four regeneration cycles — P3 Aims 1–2."
+    },
+    "difficulty": "easy",
+    "note": "Targets wastewater effluent, so P2 (effluent inputs) is defensible."
+  },
+  "MP023": {
+    "labels": {
+      "P1": "core",
+      "P3": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "EasyMP reference materials (10–100 µm fragments, 50–1000 µm fibres) with tested homogeneity — usable for spike-recovery and validation in P1 Aim 3.",
+      "P3": "Homogeneous reference fragments and fibres — borrow as standard test particles for biochar removal-efficiency experiments."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP044": {
+    "labels": {
+      "P1": "core",
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Raman tweezers trap and identify individual sub-micron particles in liquid — a route to the <5 µm fraction that P1 targets (Aim 2).",
+      "P2": "Applied to tyre and road wear particles, which reach waters through stormwater runoff — a measurement tool for P2's tyre-wear source (Aim 1)."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP025": {
+    "labels": {
+      "P1": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Backscatter polarimetry + CNN identifies PE/PP particles directly in water (83% accuracy) — an alternative identification approach for P1 Aim 2; transfer to 1–20 µm particles is uncertain."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP024": {
+    "labels": {
+      "P3": "related"
+    },
+    "acceptable": [
+      "P2"
+    ],
+    "reasons": {
+      "P3": "Removal of nanoplastics and microfibres by alum, ACH and pDADMAC coagulation at pH 7–8.6 — conventional treatment to compare biochar against."
+    },
+    "difficulty": "hard",
+    "note": "Coagulants, not biochar — related to P3 as a comparison. P2 (effluent loads) is defensible."
+  },
+  "MP022": {
+    "labels": {
+      "P2": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Development-length expression and regime map for buoyant and sinking plastics in open-channel flow — riverine transport modelling for P2 Aim 2."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP026": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Digests mussel tissue and counts pre-dyed particles: tissue sample preparation does not transfer to drinking water, and counting dyed particles is not identification."
+  },
+  "MP045": {
+    "labels": {
+      "P2": "core"
+    },
+    "acceptable": [
+      "P1",
+      "P3"
+    ],
+    "reasons": {
+      "P2": "UV, heat and mechanical shear in suspension fragment PET, nylon and PAN into micro- and nanoplastics over 12 weeks, quantifying size reduction and nanoplastic formation — fragmentation processes for P2 Aim 3."
+    },
+    "difficulty": "hard",
+    "note": "Lab fragmentation under UV, heat and shear is core to P2 Aim 3. Raman/LDIR changes after ageing (P1) and realistic test particles (P3) are defensible extras."
+  },
+  "MP029": {
+    "labels": {
+      "P1": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Sample-based subsampling for QCL infrared imaging estimates particle and MP counts with bounded error — reduces analysis time for filters with many particles (P1 Aims 2–3)."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP055": {
+    "labels": {
+      "P3": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P3": "Review linking surface properties of biochar, activated carbon, CNTs and graphene to MP removal from wastewater; modified biochar performs well — P3 Aim 2 (mechanisms)."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP051": {
+    "labels": {
+      "P1": "related",
+      "P3": "related"
+    },
+    "acceptable": [
+      "P2"
+    ],
+    "reasons": {
+      "P1": "Reviews detection techniques — microscopy, mass spectrometry, flow cytometry, FT-IR microscopy, Raman — for micro- and nanoplastics (P1 Aim 2).",
+      "P3": "Reviews removal technologies including biochar immobilisation alongside filtration, coagulation and degradation — context for P3."
+    },
+    "difficulty": "hard",
+    "note": "Broad review covering detection, fate and removal. The fate section makes P2 defensible, but it is not about river transport."
+  },
+  "MP028": {
+    "labels": {
+      "P2": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Field method quantifying fragmentation of tagged PET bottles during river transport (median ~0.8% mass loss per year) — breakdown of plastics into MPs, P2 Aim 3."
+    },
+    "difficulty": "medium",
+    "note": "About macroplastics, but explicitly measures fragmentation in rivers."
+  },
+  "MP027": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "medium",
+    "note": "Robot detecting visible particles on beach sand with NIR — marine beach and large particles; out of P1 and P2 scope."
+  },
+  "MP032": {
+    "labels": {
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Flood type controls plastic deposition on floodplains of two Dutch rivers (obstruction vs low-energy deposition) — deposition processes for P2 Aim 2."
+    },
+    "difficulty": "hard",
+    "note": "Covers plastics in general (mostly larger items), not only MPs."
+  },
+  "MP033": {
+    "labels": {},
+    "acceptable": [
+      "P2"
+    ],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Mutation rates in midges exposed to road-runoff sediment — a biological-effects study. Tyre wear + stormwater may tempt P2/P3, but nothing is transported or captured."
+  },
+  "MP050": {
+    "labels": {
+      "P3": "core",
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P3": "Untreated and air-oxidised biochar in bioretention columns removed 0.02–1 µm polystyrene nanoplastics from synthetic stormwater; vegetation reduced later leaching — P3 Aims 1 and 3.",
+      "P2": "Bioretention treats stormwater runoff before it reaches rivers — how well it retains MPs changes urban input loads (P2 Aim 1)."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP046": {
+    "labels": {
+      "P1": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Nile Red at nanomolar concentration enables single-particle counting of nanoplastics in bottled and tap water while controlling dye-aggregate false positives — P1 Aims 2–3 and drinking-water reference values."
+    },
+    "difficulty": "easy",
+    "note": ""
+  },
+  "MP035": {
+    "labels": {
+      "P1": "core"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P1": "Compares Nile Red and DCVJ fluorescent dyes for detecting micro- and nanoplastics, including false positives from dye aggregation — identification and QA/QC for P1 (Aims 2–3)."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP054": {
+    "labels": {
+      "P3": "core"
+    },
+    "acceptable": [
+      "P2"
+    ],
+    "reasons": {
+      "P3": "Magnetic iron-oxide–biochar composite removed ~98.5% of biodegradable PHBV microplastics from simulated secondary effluent, with magnetic separation and reuse — P3 Aims 1–2."
+    },
+    "difficulty": "medium",
+    "note": "Targets secondary effluent, so P2 is defensible. Note the MPs are a biodegradable polymer."
+  },
+  "MP057": {
+    "labels": {
+      "P3": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P3": "Review of lignin-derived biochar that analyses adsorption mechanisms for microplastics among other emerging contaminants — feedstock and mechanism context for P3 Aims 1–2."
+    },
+    "difficulty": "hard",
+    "note": "Microplastics are one of four contaminant classes (with pharmaceuticals, pesticides, PFAS)."
+  },
+  "MP040": {
+    "labels": {
+      "P2": "related",
+      "P3": "related"
+    },
+    "acceptable": [
+      "P1"
+    ],
+    "reasons": {
+      "P2": "MP abundance and stage-wise removal efficiencies in three Srinagar treatment plants — effluent load data for P2 Aim 1 (WWTP inputs).",
+      "P3": "Sand, sand–charcoal and sand–activated-charcoal filters removed 97–99.5% of MPs — the closest low-cost comparison to a biochar filter."
+    },
+    "difficulty": "hard",
+    "note": "Charcoal filters are the closest comparison to biochar, but the paper never calls them biochar — related, not core. P1 is defensible."
+  },
+  "MP056": {
+    "labels": {
+      "P3": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P3": "Bibliometric review of biochar and MPs: in water, fixed columns reach ~95–99% removal and magnetic biochar captures particles down to 1 µm — overview for P3."
+    },
+    "difficulty": "medium",
+    "note": "About half the review covers biochar in MP-contaminated soil, which is out of scope."
+  },
+  "MP048": {
+    "labels": {
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Review of microbead occurrence in Great Lakes waters, sediments and shorelines plus the authors' St. Lawrence and Ottawa river surveys, with wastewater as the entry route — freshwater occurrence and sources for P2 (Aims 1–2)."
+    },
+    "difficulty": "medium",
+    "note": ""
+  },
+  "MP037": {
+    "labels": {
+      "P2": "related"
+    },
+    "acceptable": [],
+    "reasons": {
+      "P2": "Biofilm morphology controls MP retention and fast flow paths in porous media — a mechanism to borrow for riverbed sediments (Aim 2)."
+    },
+    "difficulty": "hard",
+    "note": "Soil/subsurface setting, so related rather than core for P2."
+  },
+  "MP061": {
+    "labels": {},
+    "acceptable": [],
+    "reasons": {},
+    "difficulty": "hard",
+    "note": "Biochar used as a filler inside a biodegradable plastic — no MPs are captured from water."
+  }
+}
