@@ -127,7 +127,7 @@ USE_LANGSMITH = False
 if USE_LANGSMITH:
     os.environ["LANGSMITH_API_KEY"] = get_key("LANGSMITH_API_KEY")
     os.environ["LANGSMITH_TRACING"] = "true"
-    os.environ["LANGSMITH_PROJECT"] = "tutorial5-paper-triage"
+    os.environ["LANGSMITH_PROJECT"] = "tutorial5-paper-triage-v2"
 ''')
 
 # ---- data: loaded from GitHub (files written by export_data() below)
