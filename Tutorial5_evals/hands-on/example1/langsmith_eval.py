@@ -66,7 +66,8 @@ def code_graders(gold: str = "v2"):
             scores.update(read_before_save=g["trace"]["read_before_save"],
                           duplicate_saves=g["trace"]["duplicate_saves"],
                           digest_ok=g["digest"]["digest_sent_once"] and g["digest"]["digest_format_ok"],
-                          llm_calls=g["ops"]["llm_calls"], tokens=g["ops"]["total_tokens"])
+                          llm_calls=g["ops"]["llm_calls"],
+                          k_tokens=g["ops"]["total_tokens"] / 1000)  # LangSmith caps scores at 99,999
             if inputs["reposted"]:
                 scores["repost_detected"] = g["trace"]["repost_detected"]
         sfx = "" if gold == "v2" else " (key v1)"
