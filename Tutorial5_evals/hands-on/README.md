@@ -36,8 +36,6 @@ scripts/
 notebook/                   GENERATED — the notebook version + data (opened from Colab)
 ```
 
-See **HANDOFF.md** for the full context, decisions, results so far and next steps.
-
 ## Notebook version
 
 `notebook/05_evaluating_a_triage_agent.ipynb` walks through the same eval in plain Python:
