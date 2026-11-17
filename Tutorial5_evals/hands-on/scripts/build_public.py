@@ -35,20 +35,20 @@ code = lambda s, form=False: cells.append(
 md(f"""
 # Tutorial 5: Evaluating an agent
 
-**AgentForge Workshop · Tutorial 5 · Example 1 · about 40 minutes, self-paced**
+**AgentForge Workshop · Tutorial 5 · about 40 minutes**
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/{COLAB_PATH})
 
 An eval has four parts: a **task** (input and environment), a **grader**, **metrics**,
 and **trials**, all run by an **eval harness** that sits around the agent. In this notebook you
-build that harness yourself, in plain Python, for the paper-triage agent from the demo:
+build that harness yourself, in plain Python, for a paper-triage agent:
 
 > Each week a lab gets new papers. The agent reads them, decides which of the lab's three projects
 > each paper matters to (**core** or **related**), saves its decisions, and sends one digest.
 
-Then you use the harness the way the demo did: **improve the agent**, **improve the eval**, and
-**compare the agent with an LLM workflow**. The demo showed these steps in LangSmith; here you see
-every line.
+Then you use the harness for three decisions: **improve the agent**, **improve the eval**, and
+**compare the agent with an LLM workflow**. Every line of the eval is in this notebook; an eval
+platform (LangSmith, Step 8) is optional.
 
 | Step | What | Min |
 |---|---|---|
@@ -120,7 +120,7 @@ os.environ["OPENROUTER_API_KEY"] = get_key("OPENROUTER_API_KEY")
 md("""
 **Optional: traces in LangSmith.** Everything below works without it. If you have a LangSmith key
 (free at <https://smith.langchain.com>), add it as a secret named `LANGSMITH_API_KEY`, set
-`USE_LANGSMITH = True` and every run will appear there as a trace, like in the demo.
+`USE_LANGSMITH = True` and every run will appear there as a trace.
 """)
 code('''
 USE_LANGSMITH = False
@@ -481,7 +481,7 @@ md("""
 ---
 ## Step 3: Graders
 
-The grid from the talk, filled in for this agent:
+What to grade (rows) and how to grade it (columns), filled in for this agent:
 
 | What ↓ / How → | Code | LLM judge | Human |
 |---|---|---|---|
@@ -588,7 +588,7 @@ md("""
 abstract, the agent's reason and an expert's reference reason, and checks three things. Each check is
 a yes/no question, which makes the judge more consistent than a 1–10 score.
 
-Two cautions from the talk:
+Two cautions:
 * **Calibrate the judge against humans.** Read ~10 of its verdicts yourself (Exercise 4). If you
   disagree often, fix the rubric before trusting the numbers.
 * Here the judge and the agent come from the **same model family**, and judges can favour their
@@ -954,7 +954,7 @@ How to read it:
 * **Cost and speed**: LLM calls, tokens and seconds per week.
 
 If the workflow matches the agent's quality for less, ship the workflow. Agents earn their cost when
-the task is open-ended: deciding what to search, how much to read, when to stop. That is Example 2.
+the task is open-ended: deciding what to search, how much to read, when to stop.
 """)
 
 # =====================================================================================  step 8
