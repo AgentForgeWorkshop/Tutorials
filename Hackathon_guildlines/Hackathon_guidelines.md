@@ -8,4 +8,4 @@ Form working groups of 2–5 participants
       
 2) **shared GitHub repository** containing the code and examples of successful/failed reasoning traces. 
       
-3) **1-2 pages report** write up sharing insights, challenges, and/or questions for exploration gained from building agents for scientific tasks. Send it via email to the organizer.
+3) **1-2 pages report** write up sharing insights, challenges, and/or questions for exploration gained from building agents for scientific tasks. Add the file in your repo.
