@@ -146,8 +146,10 @@ model still use the tool well?
 The same server also reaches online databases. No AI key is needed for search:
 
 ```bash
-python try_server.py online "ultrawide bandgap semiconductor power electronics"
+python try_server.py online "microplastics in drinking water"
 ```
+
+Try your own topic too, for example `"coffee and sleep quality"` or `"smartphones and teen sleep"`.
 
 ✅ **Checkpoint:** real papers with links and abstracts, from OpenAlex, arXiv and Europe PMC.
 

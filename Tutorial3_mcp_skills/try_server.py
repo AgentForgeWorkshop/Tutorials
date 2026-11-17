@@ -3,7 +3,7 @@
 
     python try_server.py                  what the server offers
     python try_server.py local "band gap"
-    python try_server.py online "ultrawide bandgap semiconductor power electronics"
+    python try_server.py online "microplastics in drinking water"
     python try_server.py calc "1239.84/3.4"
     python try_server.py lay Wong
 
@@ -56,7 +56,7 @@ async def main() -> None:
         elif command == "local":
             await show(client, "search_papers", {"query": argument or "band gap", "top_k": 3})
         elif command == "online":
-            await show(client, "search_online", {"query": argument or "ultrawide bandgap semiconductor power electronics", "limit": 4})
+            await show(client, "search_online", {"query": argument or "microplastics in drinking water", "limit": 4})
         elif command == "review":
             await show(client, "review_online_literature",
                        {"question": argument or "What limits ultrawide-bandgap semiconductors in power electronics?"})
