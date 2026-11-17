@@ -1,0 +1,9 @@
+langchain==1.4.2
+langchain-openai==1.6.2
+langsmith==0.14.17
+python-dotenv>=1.0
+pytest>=8
+nbformat>=5   # dev: scripts/build_public.py
+nbclient>=0.10  # dev: scripts/check_public_notebook.py
+ipykernel>=6    # dev: scripts/check_public_notebook.py
+pandas>=2       # dev: the notebook uses pandas (Colab has it)
