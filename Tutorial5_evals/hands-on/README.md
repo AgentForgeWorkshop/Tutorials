@@ -97,7 +97,7 @@ Per-run scores: passed, core/related recall, precision, level accuracy, reason_p
 duplicate_saves, digest_ok, repost_detected, llm_calls, tokens. Experiment-level: pass@1, pass@3, pass^3.
 After `rescore`, the agent-v2 experiment also shows the same scores with the suffix `(key v1)`.
 
-## The story the results tell (slides 30+)
+## The story the results tell
 
 1. **Agent v1** — traces, scores, pass@k / pass^k.
 2. **Improve the agent** — prompt v1 → v2 (only the project description changes).

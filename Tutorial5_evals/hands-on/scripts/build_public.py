@@ -39,7 +39,7 @@ md(f"""
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/{COLAB_PATH})
 
-In the slides, an eval had four parts: a **task** (input and environment), a **grader**, **metrics**,
+An eval has four parts: a **task** (input and environment), a **grader**, **metrics**,
 and **trials**, all run by an **eval harness** that sits around the agent. In this notebook you
 build that harness yourself, in plain Python, for the paper-triage agent from the demo:
 
@@ -689,7 +689,7 @@ md("""
 One run on one week tells you little: the agent is not deterministic. The harness runs **every task
 several times** (trials), grades every run, and summarises.
 
-From the talk (backup slides), with *n* trials of a task and *c* passes:
+With *n* trials of a task and *c* passes:
 
 * **pass@k** = 1 − C(n−c, k) / C(n, k): the chance that **at least one** of *k* tries passes;
 * **pass^k** = C(c, k) / C(n, k): the chance that **all** *k* tries pass. For a weekly job that must

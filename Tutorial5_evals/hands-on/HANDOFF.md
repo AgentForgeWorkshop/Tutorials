@@ -6,7 +6,7 @@ Status as of 2026-11-13. Read this before changing anything; `CLAUDE.md` has the
 
 - **Event:** AgentForge Workshop, Tutorial 5. Slides 1–28 are the talk (why evals; eval in the dev loop;
   what to evaluate = outcome / trace / operational; how = task, grader, metrics, trials; graders =
-  code / LLM judge / human; benchmarks; pass@k and pass^k). Slides 30+ are the hands-on (~45 min).
+  code / LLM judge / human; benchmarks; pass@k and pass^k). The hands-on (~45 min) has **no slides**: participants follow `Tutorial5_evals/README.md` (the participant guide) and the notebook (decided 2026-11-17).
 - **Example 1** (built here): a weekly **paper-triage agent** for a fictional microplastics lab, and its eval.
   Shown live by the instructor (LangSmith) and done by participants in a Colab notebook.
 - **Example 2** (not built): a 3–4 minute *teaser* only — a literature-review agent on Claude Code
@@ -123,8 +123,7 @@ workflow's prompt and input were aligned with the agent's** — re-run it.
    and use Compare. Do one live run during the talk. Tested offline against a stub server (24 runs per
    experiment, all scores and pass@k/pass^k correct); **not yet run against real LangSmith**, and `rescore`
    (evaluating an existing experiment) could not be tested offline at all — check it first.
-4. Slides 30–39: platforms; Example 1 (task, What×How grid, results tables, the three comparisons);
-   check backup slide on pass^k (exact estimator C(c,k)/C(n,k) gives 30% where (pass@1)^k gives 36% for n=5, c=3, k=2).
+4. ~~Slides 30–39~~ dropped: the participant guide `Tutorial5_evals/README.md` replaces them. Still check the talk's backup slide on pass^k (exact estimator C(c,k)/C(n,k) gives 30% where (pass@1)^k gives 36% for n=5, c=3, k=2).
 5. Judge calibration: label ~10 verdicts by hand; consider a judge from another model family.
 6. Example 2 teaser: build and pre-run (needs an Anthropic key; Claude Code doesn't run through OpenRouter).
 7. Optional: 5 trials instead of 3 for firmer comparisons; check gpt-5.6-terra cost.
