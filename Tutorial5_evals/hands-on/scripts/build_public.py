@@ -60,6 +60,7 @@ every line.
 | 5 | Improve the agent: prompt v1 vs v2 | 5 |
 | 6 | Improve the eval: the same runs, an older answer key | 4 |
 | 7 | Agent vs LLM workflow | 5 |
+| 8 | *Optional:* the same eval as a LangSmith experiment | 5 |
 | | *Exercises* | |
 """)
 
@@ -954,6 +955,86 @@ How to read it:
 
 If the workflow matches the agent's quality for less, ship the workflow. Agents earn their cost when
 the task is open-ended: deciding what to search, how much to read, when to stop. That is Example 2.
+""")
+
+# =====================================================================================  step 8
+md("""
+---
+## Step 8 (optional): The same eval as a LangSmith experiment
+
+Everything so far ran in plain Python. Eval platforms do the same thing with a UI on top. In
+LangSmith: the 8 tasks become a **dataset** (one example per week), the agent is the **target**, our
+graders become **evaluators**, and trials become **repetitions**. One run of all of that is an
+**experiment**: a table with one row per week and one column per score, which you can compare
+side by side with other experiments.
+
+Needs `USE_LANGSMITH = True` (Step 0). One experiment = 8 weeks × 3 repetitions, about the cost of
+one `run_suite`. Then open <https://smith.langchain.com> → **Datasets & Experiments** →
+`mp-triage-weeks` → **Experiments**, and click a row to see its trace.
+""")
+code('''
+from langsmith import Client, evaluate
+
+DATASET = "mp-triage-weeks"
+
+
+def upload_dataset():
+    """One example per week. The answer key is stored for reference; our graders read GOLD."""
+    client = Client()
+    if client.has_dataset(dataset_name=DATASET):
+        return
+    ds = client.create_dataset(DATASET, description="8 weekly paper-triage tasks (Tutorial 5)")
+    client.create_examples(dataset_id=ds.id, examples=[
+        dict(inputs=dict(task_id=t["task_id"], week=t["week"], feed=t["feed"], reposted=t["reposted"]),
+             outputs=dict(answer_key={p: GOLD["v2"][p]["labels"] for p in to_triage(t)}))
+        for t in TASKS])
+
+
+def code_graders(inputs, outputs):
+    """Our code graders as one LangSmith evaluator: a list of {key, score}."""
+    g = grade_run(outputs, task(inputs["task_id"]), "v2")
+    L = g["labels"]
+    scores = dict(passed=g["passed"], core_recall=L["core_recall"], related_recall=L["related_recall"],
+                  precision=L["precision"], level_accuracy=L["level_accuracy"],
+                  read_before_save=g["trace"]["read_before_save"], duplicate_saves=g["trace"]["duplicate_saves"],
+                  digest_ok=g["digest"]["digest_sent_once"] and g["digest"]["digest_format_ok"],
+                  llm_calls=g["ops"]["llm_calls"], k_tokens=g["ops"]["total_tokens"] / 1000)  # max score 99,999
+    if inputs["reposted"]:
+        scores["repost_detected"] = g["trace"]["repost_detected"]
+    return [dict(key=k, score=v) for k, v in scores.items() if v is not None]
+
+
+def reason_judge(inputs, outputs):
+    j = judge_reasons(outputs, task(inputs["task_id"]), GOLD["v2"], judge_model)
+    return dict(key="reason_pass", score=j["reason_pass_rate"])
+
+
+def pass_metrics(runs, examples):
+    """pass@1, pass@k and pass^k over the repetitions (not built into LangSmith)."""
+    by_task = {}
+    for r in runs:
+        by_task.setdefault(r.inputs["task_id"], []).append(
+            grade_run(r.outputs, task(r.inputs["task_id"]), "v2")["passed"])
+    k = min(len(v) for v in by_task.values())
+    mean = lambda f: round(statistics.mean(f(len(v), sum(v)) for v in by_task.values()), 3)
+    return {"results": [dict(key="pass@1", score=mean(lambda n, c: c / n)),
+                        dict(key=f"pass@{k}", score=mean(lambda n, c: pass_at_k(n, c, k))),
+                        dict(key=f"pass^{k}", score=mean(lambda n, c: pass_hat_k(n, c, k)))]}
+
+
+if USE_LANGSMITH:
+    upload_dataset()
+    experiment = evaluate(
+        lambda inputs: run_agent(task(inputs["task_id"]), "v2", model), data=DATASET,
+        evaluators=[code_graders, reason_judge], summary_evaluators=[pass_metrics],
+        experiment_prefix="agent-v2", num_repetitions=TRIALS, max_concurrency=4)
+else:
+    print("Skipped: set USE_LANGSMITH = True in Step 0 and re-run that cell first.")
+''')
+md("""
+In the experiment view, sort by `passed` to find failing weeks, open one, and read its trace: the
+same tool calls you printed with `show_trace` in Step 2. To compare two versions, run the cell again
+with `"v1"` (and `experiment_prefix="agent-v1"`), select both experiments and click **Compare**.
 """)
 
 # =====================================================================================  exercises
