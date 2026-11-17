@@ -55,11 +55,11 @@ Status as of 2026-11-13. Read this before changing anything; `CLAUDE.md` has the
 
 ```
 data/                       SOURCE OF TRUTH (JSON + projects.md)
-example1/                   instructor code: env, prompts, agent, workflow, graders, harness, fake_llm
+example1/                   instructor code: env, prompts, agent, workflow, graders, harness
 tests/                      pytest (free)
 example1/langsmith_eval.py  the same eval as LangSmith experiments (instructor demo)
 scripts/build_public.py     generates notebook/ (notebook + CSVs + data README)
-scripts/check_public_notebook.py   executes that notebook in dry-run mode, compares with example1/
+scripts/check_public_notebook.py   executes that notebook with real models, compares with example1/
 scripts/make_tasks.py       regenerates data/tasks.json (repost config inside)
 scripts/build_review_page.py       HTML view of the answer key for checking labels
 notebook/                   GENERATED — participant notebook + data
@@ -72,8 +72,7 @@ The participant notebook's code is a readable copy of `example1/` (same logic, w
 
 ```bash
 uv sync && cp .env.example .env                 # add OPENROUTER_API_KEY (+ LANGSMITH_API_KEY)
-uv run pytest -q                                 # 7 tests, free
-uv run python -m example1.harness run --system agent --prompt v2 --trials 3 --fake   # free dry run
+uv run pytest -q                                 # 6 tests (graders, data), free
 uv run python -m example1.harness run --system agent --prompt v1 --trials 3          # real
 uv run python -m example1.harness summary results/*.jsonl
 uv run python -m example1.harness summary results/agent-v2.jsonl --gold v1           # re-score, no new runs
@@ -86,7 +85,7 @@ uv run python scripts/build_public.py && uv run python scripts/check_public_note
 1. Rebuild `notebook/`, commit, merge to `main` of `AgentForgeWorkshop/Tutorials`.
 2. Create and push the tag: `git tag tutorial5-v1 && git push origin tutorial5-v1`
    (the notebook's data URLs only work once the tag exists).
-3. Open the notebook from its Colab badge and run it once with a real key (`DRY_RUN = False`).
+3. Open the notebook from its Colab badge and run it once
 4. Data changed later? Bump `DATA_TAG` in `scripts/build_public.py`, rebuild, commit, tag again.
 
 ## 6. Results so far (instructor's first real run of the participant notebook)
@@ -134,10 +133,7 @@ workflow's prompt and input were aligned with the agent's** — re-run it.
 
 - **Edit the notebook through `scripts/build_public.py`, not by hand** — or port hand edits back, then rebuild.
   Cell code sits inside `'''…'''` strings there: write `\\n` to get `\n` in the notebook, `\\s` for regex `\s`.
-- **Dry-run hooks** (the scripted model in `fake_llm.py` and the notebook's hidden cell): the workflow's user
-  message must contain `Paper MPxxx`; the digest system prompt must start with
-  `You write the weekly paper digest`; structured-output schemas are named `PaperDecision` and `ReasonVerdicts`.
-- **The fake model is not a result.** Never report dry-run numbers.
+- The scripted fake model (dry runs) was removed on 2026-11-17: every run, test of the notebook and demo now uses real models.
 - The env is thread-safe (an `RLock`) because agents issue parallel tool calls; removing it crashes SQLite.
 - CSV week numbers load as numpy ints; the notebook casts them with `int()` for SQLite.
 - `ChatOpenAI` + OpenRouter: structured output uses `method="function_calling"` (works for any tool-calling model).

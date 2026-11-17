@@ -5,7 +5,6 @@
     python -m example1.harness summary results/*.jsonl            # compare systems
     python -m example1.harness summary results/agent-v2.jsonl --gold v1   # re-score, no new runs
     python -m example1.harness errors results/agent-v1.jsonl      # which papers go wrong most?
-    add --fake to any `run` for a free dry run with a scripted model (no API keys needed)
 """
 import argparse
 import collections
@@ -21,12 +20,7 @@ from .graders import grade_run, pass_at_k, pass_hat_k
 
 
 # ------------------------------------------------------------------ run
-def run_one(system: str, prompt: str, task: dict, trial: int, model=None, judge_model=None, fake=False) -> dict:
-    if fake:
-        from .fake_llm import FakeTriageModel
-        model = FakeTriageModel(seed=hash((task["task_id"], trial, system, prompt)) % 10**6,
-                                error_rate=0.25 if prompt == "v1" else 0.08)
-        judge_model = FakeTriageModel(seed=trial) if judge_model is not None else None
+def run_one(system: str, prompt: str, task: dict, trial: int, model=None, judge_model=None) -> dict:
     if system == "agent":
         from .agent import run_agent
         result = run_agent(task, prompt, model=model)
@@ -37,24 +31,21 @@ def run_one(system: str, prompt: str, task: dict, trial: int, model=None, judge_
         raise ValueError(system)
     grades = {"v2": grade_run(result, task, "v2", judge_model), "v1": grade_run(result, task, "v1")}
     return dict(run_id=uuid.uuid4().hex[:8], system=result["system"], task_id=task["task_id"], trial=trial,
-                model=getattr(model, "model_name", None) or getattr(model, "model", None) or "fake",
+                model=getattr(model, "model_name", None) or getattr(model, "model", None),
                 time=time.strftime("%Y-%m-%d %H:%M:%S"), result=result, grades=grades)
 
 
 def run_suite(system="agent", prompt="v2", task_ids=None, trials=3, model=None, judge_model=None,
-              judge=True, fake=False, out=None, concurrency=4, verbose=True) -> list[dict]:
+              judge=True, out=None, concurrency=4, verbose=True) -> list[dict]:
     tasks = [t for t in data.tasks() if not task_ids or t["task_id"] in task_ids]
-    if fake:
-        judge_model = "fake" if judge else None
-    else:
-        model = model or config.make_model()
-        judge_model = (judge_model or config.make_model(config.JUDGE_MODEL)) if judge else None
+    model = model or config.make_model()
+    judge_model = (judge_model or config.make_model(config.JUDGE_MODEL)) if judge else None
     jobs = [(t, k) for t in tasks for k in range(trials)]
-    out = pathlib.Path(out or config.RESULTS_DIR / f"{system}-{prompt}{'-fake' if fake else ''}.jsonl")
+    out = pathlib.Path(out or config.RESULTS_DIR / f"{system}-{prompt}.jsonl")
     out.parent.mkdir(parents=True, exist_ok=True)
     records = []
     with ThreadPoolExecutor(max_workers=concurrency) as pool, out.open("a") as f:
-        futures = [pool.submit(run_one, system, prompt, t, k, model, judge_model, fake) for t, k in jobs]
+        futures = [pool.submit(run_one, system, prompt, t, k, model, judge_model) for t, k in jobs]
         for fut in futures:
             rec = fut.result()
             records.append(rec)
@@ -159,7 +150,6 @@ def main():
     r.add_argument("--model", help="OpenRouter model id (default: AGENT_MODEL)")
     r.add_argument("--judge-model", help="OpenRouter model id (default: JUDGE_MODEL)")
     r.add_argument("--no-judge", action="store_true")
-    r.add_argument("--fake", action="store_true", help="dry run with a scripted model, no API calls")
     r.add_argument("--concurrency", type=int, default=4)
     r.add_argument("--out")
     s = sub.add_parser("summary")
@@ -172,10 +162,10 @@ def main():
     a = ap.parse_args()
 
     if a.cmd == "run":
-        model = None if a.fake else config.make_model(a.model)
-        judge_model = None if (a.no_judge or a.fake) else config.make_model(a.judge_model or config.JUDGE_MODEL)
+        model = config.make_model(a.model)
+        judge_model = None if a.no_judge else config.make_model(a.judge_model or config.JUDGE_MODEL)
         recs = run_suite(a.system, a.prompt, a.tasks.split(",") if a.tasks else None, a.trials,
-                         model, judge_model, judge=not a.no_judge, fake=a.fake, out=a.out,
+                         model, judge_model, judge=not a.no_judge, out=a.out,
                          concurrency=a.concurrency)
         print_table(summarize(recs))
     elif a.cmd == "summary":

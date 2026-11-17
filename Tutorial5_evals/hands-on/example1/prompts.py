@@ -68,8 +68,7 @@ How to work:
 
 
 def classify_user_message(task: dict, paper_id: str, paper_text: str) -> str:
-    """paper_text is exactly what the agent's read_paper tool returns.
-    Keep the 'Paper MPxxx' wording: the scripted dry-run model looks for it."""
+    """paper_text is exactly what the agent's read_paper tool returns."""
     return f"Week {task['week']}. Paper {paper_id}:\n{paper_text}"
 
 

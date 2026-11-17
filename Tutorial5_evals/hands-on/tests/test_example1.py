@@ -1,13 +1,10 @@
-"""Tests for Example 1 — no API keys needed (uses the scripted fake model).
+"""Tests for Example 1's graders and data — no API keys needed, no model calls.
 
     pytest -q
 """
 from example1 import data
-from example1.agent import run_agent
-from example1.fake_llm import FakeTriageModel
 from example1.graders import (digest_grades, grade_run, label_grades, parse_digest, pass_at_k,
                               pass_hat_k, trace_grades, week_pass)
-from example1.workflow import run_workflow
 
 
 def perfect_result(task, gold_version="v2"):
@@ -77,25 +74,3 @@ def test_pass_at_k_and_pass_hat_k():
     assert pass_at_k(5, 3, 3) == 1.0
     assert abs(pass_hat_k(5, 3, 2) - 0.3) < 1e-9   # exact estimator; (pass@1)^2 would say 0.36
 
-
-def test_agent_and_workflow_run_end_to_end_with_fake_model():
-    t = data.task("week_06")
-    for run in (run_agent, run_workflow):
-        r = run(t, "v2", model=FakeTriageModel(seed=3, error_rate=0.0))
-        g = grade_run(r, t, "v2", judge_model=FakeTriageModel())
-        assert r["error"] is None and g["passed"] and g["trace"]["repost_detected"]
-        assert g["judge"]["reason_pass_rate"] == 1.0
-
-
-def test_langsmith_evaluators_without_server():
-    """The LangSmith evaluators are our graders; check them on fake runs (no LangSmith call)."""
-    from types import SimpleNamespace
-    from example1.langsmith_eval import code_graders, examples, pass_k
-    assert len(examples()) == 8
-    t = data.task("week_06")
-    runs = [run_agent(t, "v2", model=FakeTriageModel(seed=s, error_rate=0.0)) for s in (1, 2)]
-    scores = {d["key"]: d["score"] for d in code_graders("v2")({"task_id": t["task_id"], "reposted": t["reposted"]}, runs[0])}
-    assert scores["passed"] and scores["repost_detected"] and scores["core_recall"] == 1.0
-    assert all(d["key"].endswith("(key v1)") for d in code_graders("v1")({"task_id": t["task_id"], "reposted": []}, runs[0]))
-    summary = pass_k("v2")([SimpleNamespace(inputs={"task_id": t["task_id"]}, outputs=r) for r in runs], [])
-    assert {d["key"]: d["score"] for d in summary["results"]} == {"pass@1": 1.0, "pass@2": 1.0, "pass^2": 1.0}

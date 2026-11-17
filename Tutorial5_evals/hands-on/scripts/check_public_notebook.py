@@ -1,8 +1,9 @@
-"""Run the generated participant notebook end to end, for free, and check it against example1/.
+"""Run the generated participant notebook end to end with real models, and check it against example1/.
 
     uv run python scripts/check_public_notebook.py
 
-- DRY_RUN = True (scripted stand-in model, no API keys) and the data read from notebook/data
+- needs OPENROUTER_API_KEY (real API calls: 3 suites x 8 weeks x 3 trials, plus the judge — costs money)
+- reads the data from notebook/data, so it works before the tag exists
 - fails if any cell errors, or if the notebook's graders / answer keys disagree with example1/
 Needs the dev dependencies (nbclient, ipykernel).
 """
@@ -40,17 +41,18 @@ print("MISMATCHES", bad)
 nb = nbformat.read(NB, as_version=4)
 for c in nb.cells:
     if c.cell_type == "code":
-        c.source = c.source.replace("DRY_RUN = False ", "DRY_RUN = True  ")
         if c.source.startswith("%pip"):
             c.source = "# pip install skipped"
         if c.source.lstrip().startswith("import json\nimport urllib.request"):
             c.source = c.source.replace(c.source.split('BASE = "')[1].split('"')[0], LOCAL_DATA)
 nb.cells.append(nbformat.v4.new_code_cell(CHECK))
-NotebookClient(nb, timeout=900, allow_errors=True).execute()
+NotebookClient(nb, timeout=3600, allow_errors=True).execute()
 
 errors = [(i, o["ename"], o["evalue"][:200]) for i, c in enumerate(nb.cells) if c.cell_type == "code"
           for o in c.get("outputs", []) if o.get("output_type") == "error"]
 last = "".join(o.get("text", "") for o in nb.cells[-1].outputs)
+(ROOT / "results").mkdir(exist_ok=True)
+nbformat.write(nb, ROOT / "results" / "notebook_executed.ipynb")  # for reading the outputs; not committed
 print("cell errors:", errors or "none")
 print(last.strip())
 sys.exit(1 if errors or "MISMATCHES 0" not in last else 0)

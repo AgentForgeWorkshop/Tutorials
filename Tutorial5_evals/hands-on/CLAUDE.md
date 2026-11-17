@@ -4,11 +4,11 @@ Read `HANDOFF.md` first: context, decisions, results so far, next steps, gotchas
 
 ## Commands
 - `uv sync` · `uv run pytest -q` (free)
-- `uv run python -m example1.harness run --system agent|workflow --prompt v1|v2 --trials 3 [--fake]`
+- `uv run python -m example1.harness run --system agent|workflow --prompt v1|v2 --trials 3`
 - `uv run python -m example1.harness summary results/*.jsonl [--gold v1]` · `... errors <file>`
 - `uv run python -m example1.langsmith_eval upload | run agent v1 | run agent v2 | run workflow v2 | rescore <exp>`
 - `uv run python scripts/build_public.py` then `uv run python scripts/check_public_notebook.py`
-  (must print `cell errors: none` and `MISMATCHES 0`)
+  (real API calls; must print `cell errors: none` and `MISMATCHES 0`)
 
 ## Rules
 - Keep the code as simple as possible; the instructor prefers fewer lines over more features.
@@ -17,6 +17,5 @@ Read `HANDOFF.md` first: context, decisions, results so far, next steps, gotchas
 - Comparisons change one thing only: prompt v1 vs v2 = project description only; agent vs workflow =
   architecture only (same wording, inputs, model, graders).
 - Keys come from `get_key()` / `.env`; never commit `.env`, never print a key or token.
-- Dry-run (fake model) numbers are never results.
 - Pinned versions match Tutorial 1 (`langchain==1.4.2`, `langchain-openai==1.6.2`); don't bump without reason.
 - This folder lives at `Tutorial5_evals/hands-on/` in the public `AgentForgeWorkshop/Tutorials` repo — everything here is public.

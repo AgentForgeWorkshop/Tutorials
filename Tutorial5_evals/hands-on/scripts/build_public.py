@@ -84,8 +84,7 @@ A key pasted into a cell gets saved into the notebook, and notebooks get shared.
 key like a password.
 
 This notebook uses two models: a **small** one that runs the agent, and a **large** one that acts as
-the LLM judge. No credit? Set `DRY_RUN = True`: a scripted stand-in replaces both models so you can
-follow every step for free. Its scores are made up — never report them.
+the LLM judge.
 """)
 code('''
 import getpass
@@ -107,7 +106,6 @@ def get_key(name: str) -> str:
 # Any id from https://openrouter.ai/models that supports tool calling ("Tools" filter).
 AGENT_MODEL = "openai/gpt-5-mini"     # small model: runs the agent and the workflow
 JUDGE_MODEL = "openai/gpt-5.6-terra"  # large model: the LLM judge
-DRY_RUN = False                       # True = no API calls, scripted stand-in (scores are NOT real)
 
 
 def make_model(model_id: str):
@@ -116,8 +114,7 @@ def make_model(model_id: str):
                            api_key=os.environ["OPENROUTER_API_KEY"], max_retries=4)
 
 
-if not DRY_RUN:
-    os.environ["OPENROUTER_API_KEY"] = get_key("OPENROUTER_API_KEY")
+os.environ["OPENROUTER_API_KEY"] = get_key("OPENROUTER_API_KEY")
 ''')
 md("""
 **Optional: traces in LangSmith.** Everything below works without it. If you have a LangSmith key
@@ -192,48 +189,10 @@ def task(task_id):
 print(f"{{len(PAPERS)}} papers, {{len(TASKS)}} weekly tasks, answer keys: {{list(GOLD)}}")
 ''')
 
-# ---- fake model (form cell)
-fake_src = (ROOT / "example1" / "fake_llm.py").read_text()
-fake_src = fake_src.split('GENERIC = "It is about microplastics."', 1)[1]
-fake_src = (fake_src.replace('data.gold("v2")', 'GOLD["v2"]').replace("data.papers()", "PAPERS")
-            .replace("data.PROJECTS", "PROJECTS").replace("data.LEVELS", "LEVELS"))
 code('''
-#@title Scripted stand-in model (only used when DRY_RUN = True) { display-mode: "form" }
-# A fake "model" that knows the answer key and makes random mistakes, so every step of this
-# notebook runs without an API key. It is NOT a model: its scores mean nothing.
-import json
-import random
-import re
-from typing import Any
-
-from langchain_core.language_models.chat_models import BaseChatModel
-from langchain_core.messages import AIMessage, ToolMessage
-from langchain_core.outputs import ChatGeneration, ChatResult
-from langchain_core.runnables import RunnableLambda
-
-GENERIC = "It is about microplastics."
-''' + fake_src, form=True)
-
-code('''
-import zlib
-
-if DRY_RUN:
-    model = FakeTriageModel(seed=0, error_rate=0.15)
-    judge_model = FakeTriageModel(seed=0)
-    print("DRY RUN: scripted stand-in model. Scores below are made up.")
-else:
-    model, judge_model = make_model(AGENT_MODEL), make_model(JUDGE_MODEL)
-    print("Agent model:", AGENT_MODEL, "| judge model:", JUDGE_MODEL)
-    print(model.invoke("Reply with exactly: ready").text)
-
-
-def model_for_run(prompt_version, task_id, trial):
-    """The real model is the same for every run. In a dry run, each run gets its own scripted
-    stand-in (v1 makes more mistakes), so the tables show some variation."""
-    if not DRY_RUN:
-        return model
-    seed = zlib.crc32(f"{prompt_version}-{task_id}-{trial}".encode())
-    return FakeTriageModel(seed=seed, error_rate=0.25 if prompt_version == "v1" else 0.08)
+model, judge_model = make_model(AGENT_MODEL), make_model(JUDGE_MODEL)
+print("Agent model:", AGENT_MODEL, "| judge model:", JUDGE_MODEL)
+print(model.invoke("Reply with exactly: ready").text)
 ''')
 
 # =====================================================================================  step 1
@@ -763,7 +722,7 @@ def run_suite(system_fn, prompt_version, tasks=TASKS, trials=TRIALS, judge=True,
     """Every task x every trial: run, then grade against both answer keys."""
     def one(job):
         t, trial = job
-        result = system_fn(t, prompt_version, model_for_run(prompt_version, t["task_id"], trial))
+        result = system_fn(t, prompt_version, model)
         return dict(task_id=t["task_id"], trial=trial, system=result["system"], result=result,
                     grades={"v2": grade_run(result, t, "v2", judge_model if judge else None),
                             "v1": grade_run(result, t, "v1")})

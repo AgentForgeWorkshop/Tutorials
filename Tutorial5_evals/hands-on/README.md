@@ -27,12 +27,11 @@ example1/
   graders.py       code graders (labels, digest, trace, cost), LLM judge for reasons, pass@k / pass^k
   harness.py       platform-free eval harness: tasks x trials -> run -> grade -> summary
   langsmith_eval.py  the same eval as LangSmith experiments (dataset, evaluators, repetitions)
-  fake_llm.py      scripted stand-in model for free dry runs and tests (not a real result!)
 tests/             pytest, no API keys needed
 scripts/
   make_tasks.py             rebuilds data/tasks.json from papers.json
   build_public.py           writes notebook/ (participant notebook + CSV data + data README)
-  check_public_notebook.py  runs that notebook for free (dry run, local data) and checks it against example1/
+  check_public_notebook.py  runs that notebook with real models (local data) and checks it against example1/
   build_review_page.py      HTML page of the answer key, for checking labels by eye
 notebook/                   GENERATED — the participant notebook + data (opened from Colab)
 ```
@@ -45,7 +44,7 @@ See **HANDOFF.md** for the full context, decisions, results so far and next step
 task and data, the agent and its trace, graders, the harness (pass@k / pass^k), prompt v1 vs v2,
 answer key v1 vs v2, and agent vs LLM workflow. It loads its data from the public Tutorials repo at the
 tag `tutorial5-v1`. Keys come from Colab Secrets (`OPENROUTER_API_KEY`, optional `LANGSMITH_API_KEY`), as
-in Tutorial 1. `DRY_RUN = True` runs every cell for free with a scripted stand-in model (scores are not real).
+in Tutorial 1.
 
 ```bash
 uv run python scripts/build_public.py           # after changing data/, prompts or graders
@@ -68,9 +67,6 @@ In **Colab** you don't need uv: the participant notebook installs what it needs 
 ## Run the evals
 
 ```bash
-# free dry run with the scripted model
-uv run python -m example1.harness run --system agent --prompt v2 --trials 3 --fake
-
 # real runs (OpenRouter)
 uv run python -m example1.harness run --system agent    --prompt v1 --trials 3
 uv run python -m example1.harness run --system agent    --prompt v2 --trials 3
