@@ -371,6 +371,8 @@ projects are described:
 Changing one thing at a time is what lets you say *why* a score changed (Step 5).
 """)
 code('''
+import re
+
 DIGEST_FORMAT = """## P1
 - MP012 (core): <title> — <one-sentence reason>
 - MP015 (related): <title> — <one-sentence reason>
